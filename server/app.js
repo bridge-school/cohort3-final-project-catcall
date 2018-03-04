@@ -26,7 +26,8 @@ app.use(notFoundHandler);
 // error handler
 app.use(errorHandler);
 
-// let's connect to the database here so we can query it anywhere else in our code and expect to have already connected
+// anything that bootstraps the express app will first connect to the database and then have access to the app object
+// This way, we can query the database anywhere else in our code and expect to have already connected
 export default () => connectToDb()
     .then(
         () => app
