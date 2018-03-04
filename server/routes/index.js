@@ -2,10 +2,9 @@ import express from 'express';
 
 const router = express.Router();
 
-/* GET home page. */
+/* GET greeting */
 router.get('/', function(req, res, next) {
-  // return a greeting
-  res.send('Hello World!');
+  res.send('Hello World!'); // return a greeting
 });
 
 export default router;

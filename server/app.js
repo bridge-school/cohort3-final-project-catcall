@@ -1,5 +1,5 @@
 import express from 'express';
-import logger from 'morgan';
+import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
 
@@ -7,12 +7,13 @@ import mainRouter from './routes/index';
 import usersRouter from './routes/someModels';
 
 import connectToDb from './config/db';
+import logger from './config/logger';
 
 import { errorHandler, notFoundHandler } from './middlewares';
 
 const app = express();
 
-app.use(logger('dev'));
+app.use(morgan("dev", { "stream": logger.stream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
