@@ -4,10 +4,13 @@
   "private": true,
   "scripts": {
     "start:server:dev": "npm --prefix ./server run server:dev",
+    "start:server:dev:debug": "npm --prefix ./server run server:dev:debug",
     "watch:server:dev": "nodemon -w ./server/**/*.js --exec \"npm run start:server:dev\"",
+    "watch:server:dev:debug": "nodemon -w ./server/**/*.js --exec \"npm run start:server:dev:debug\"",
     "start:server:staging": "npm run start:client:build && npm --prefix ./server run server:staging",
-    "server:dev": "npx cross-env DEBUG=* npx babel-node ./bin/www --presets env,stage-2",
-    "server:staging": "npx babel-node ./bin/www --presets env,stage-2",
+    "server:dev:debug": "npx cross-env DEBUG=* node -r babel-register -r dotenv/config ./bin/www dotenv_config_path='../.env'",
+    "server:dev": "node -r babel-register -r dotenv/config ./bin/www dotenv_config_path='../.env'",
+    "server:staging": "node -r babel-register -r dotenv/config ./bin/www dotenv_config_path='../.env'",
     "dev": "npx concurrently \"npm run watch:server:dev\" \"npm run watch:client:dev\"",
     "watch:client:dev": "nodemon -w ./client/**/*.js --exec \"npm run start:client:dev\"",
     "start:client:dev": "npm --prefix ./client run client:dev",
@@ -18,14 +21,16 @@
     "client:test": "npx react-scripts test --env=jsdom"
   },
   "dependencies": {
+    "babel-register": "^6.26.0",
     "body-parser": "~1.18.2",
     "cookie-parser": "~1.4.3",
+    "dotenv": "^5.0.1",
     "express": "~4.15.5",
+    "mongoose": "^5.0.8",
     "morgan": "~1.9.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
-    "react-scripts": "1.1.1",
-    "serve-favicon": "~2.4.5"
+    "react-scripts": "1.1.1"
   },
   "devDependencies": {
     "babel-preset-env": "^1.6.1",
