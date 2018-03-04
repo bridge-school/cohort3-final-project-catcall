@@ -10,7 +10,9 @@ router.get('/', function(req, res, next) {
         // we are providing the empty object to mean we are not giving any constraints -- we want them all!
         .find({})
         .then(
-            someModels => res.status(200).send(someModels)
+            someModels => res
+                .status(200) // explicitly set the status code to 200 to indicate the request was successful
+                .send(someModels)
         )
         .catch(err => next(err)); // if we get an error, propagate the error to the next middleware
 });
@@ -22,7 +24,7 @@ router.post('/:name', function(req, res, next) {
     someModel.save()
         .then(
             () => res
-                .status(201)
+                .status(201) // explicitly set the status code to 201 to indicate an entry was successfully created
                 .send(`Successfully created the model with name '${req.params.name}'! Try and view all the models now!`)
         )
         .catch(err => next(err));
@@ -33,7 +35,7 @@ router.delete('/:name', function(req, res, next) {
     SomeModel.remove({name: req.params.name})
         .then(
             () => res
-                .status(200)
+                .status(200) // explicitly set the status code to 201 to indicate the request was successful
                 .send(`Successfully removed the model with name '${req.params.name}'! Try and view all the models now!`)
         )
         .catch(err => next(err)); // if we get an error, propagate the error to the next middleware
