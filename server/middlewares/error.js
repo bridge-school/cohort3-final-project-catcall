@@ -3,7 +3,9 @@ import logger from '../config/logger';
 export const errorHandler = function(err, req, res, next) {
     // set locals, only providing error in development
     res.locals.message = err.message;
-    res.locals.error = req.app.get('env') === 'development' ? err : {};
+    res.locals.error = req.app.get('env') === 'development'
+        ? err
+        : {};
 
     logger.error(err);
 

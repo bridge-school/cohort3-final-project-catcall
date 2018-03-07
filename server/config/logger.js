@@ -37,7 +37,7 @@ let logger = new winston.Logger({
 
 // modify the winston logger to make it compatible with morgan's request logger
 logger.stream = {
-    write: function(message, encoding){
+    write: function(message, encoding) {
         logger.info(message);
     }
 };
