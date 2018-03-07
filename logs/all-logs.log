@@ -1,0 +1,7 @@
+2018-03-04T20:49:11.469Z - info: Listening on port 3001
+2018-03-04T20:51:31.441Z - info: Listening on port 3001
+2018-03-04T20:51:39.514Z - info: [0mGET / [36m304 [0m2.819 ms - -[0m
+
+2018-03-04T20:51:57.280Z - info: [0mGET /someModels [36m304 [0m51.837 ms - -[0m
+
+2018-03-07T17:34:54.674Z - info: Listening on port 3001
