@@ -19,7 +19,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 app.use('/', mainRouter);
-app.use('/someModels', usersRouter);
+app.use('/api/someModels', usersRouter);
 
 // catch 404 and forward to error handler
 app.use(notFoundHandler);
