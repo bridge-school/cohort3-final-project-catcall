@@ -46,6 +46,6 @@
     "node": "^8",
     "npm": "^5",
     "npx": "^9",
-    "gh-pages": "^1"
+    "concurrently": "^3"
   }
 }
