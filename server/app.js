@@ -18,6 +18,15 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
+if (process.env.npm_lifecycle_event.endsWith(':dev')) {
+    app.use(function(req, res, next) {
+        // allow requests from the dev server
+        res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
+        res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+        next();
+    });
+}
+
 app.use('/', mainRouter);
 app.use('/api/someModels', usersRouter);
 

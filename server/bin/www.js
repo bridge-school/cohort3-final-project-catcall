@@ -15,7 +15,10 @@ const serverDebug = debug('server:server');
  * Get port from environment and store in Express.
  */
 
-const port = normalizePort(process.env.PORT || process.env.npm_package_config_serverPort|| '3001');
+const port = normalizePort(
+    process.env.PORT
+        || '3001'
+);
 
 setupApp()
     .then(
@@ -32,7 +35,7 @@ setupApp()
            * Listen on provided port, on all network interfaces.
            */
 
-          server.listen(port);
+          server.listen(port, '0.0.0.0');
           server.on('error', onError);
           server.on('listening', onListening(server));
       }

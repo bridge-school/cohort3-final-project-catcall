@@ -1,9 +1,21 @@
 import React, { Component } from 'react';
+import apiService from './shared/services/api-service';
 
 import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
+  componentDidMount() {
+      apiService
+          .get('/someModels')
+          .then(function (response) {
+              console.log(response);
+          })
+          .catch(function (error) {
+              console.log(error);
+          });
+  }
+
   render() {
     return (
       <div className="App">
