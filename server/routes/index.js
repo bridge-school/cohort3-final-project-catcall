@@ -3,7 +3,7 @@ import path from 'path';
 
 const router = express.Router();
 
-const isProdBuild = process.env.npm_lifecycle_event.endsWith(':prod');
+const isProdBuild = process.env.npm_lifecycle_event.endsWith('prod');
 
 if (isProdBuild) {
     router.get('/', function(req, res, next) {

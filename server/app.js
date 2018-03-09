@@ -2,6 +2,7 @@ import express from 'express';
 import morgan from 'morgan';
 import cookieParser from 'cookie-parser';
 import bodyParser from 'body-parser';
+import helmet from 'helmet';
 
 import mainRouter from './routes/index';
 import usersRouter from './routes/someModels';
@@ -13,12 +14,14 @@ import { errorHandler, notFoundHandler } from './middlewares';
 
 const app = express();
 
+app.use(helmet());
+
 app.use(morgan("dev", { "stream": logger.stream }));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-if (process.env.npm_lifecycle_event.endsWith(':dev')) {
+if (process.env.npm_lifecycle_event.endsWith('dev')) {
     app.use(function(req, res, next) {
         // allow requests from the dev server
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
