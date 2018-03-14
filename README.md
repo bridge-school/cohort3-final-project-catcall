@@ -1,5 +1,16 @@
-#  [Project Title]
-[Project description here]
+#  Catcall.IO
+When a user experiences a “cat-call” they can quickly log the location and their response and view other locations where cat-calls have occured.
+
+## Git Flow
+
+1. Fork to your github
+2. Clone to your local 
+3. Checkout your own branches for new features
+4. During development Pull from master
+5. Push origin <branch-name>
+6. Make Pull Request
+7. Team Approves 
+8. 👏 
 
 ## Getting Started
 
