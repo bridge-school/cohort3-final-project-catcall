@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 // import apiService from './shared/services/api-service';
 
+import { getUserLocation, fetchLocation } from './actions/index';
 import './App.css';
 
 import Input from './components/Input'
@@ -20,20 +21,21 @@ class App extends Component {
   //         });
   // }
 
-  changeFilter = ev => this.props.dispatch({ type: 'SET_FILTER', payload: ev.target.value })
+  handleChange = (e) => {
+    this.props.getUserLocation(e.target.value);
+  }
 
   startNewReport = () => { }
 
   viewReports = () => { }
 
-
   render() {
-    const { filter } = this.props
+    const { userLocation } = this.props;
 
     return (
       <div className="App">
         <PageTitle>CatCall.io</PageTitle>
-        <Input value={filter} onChange={this.changeFilter} />
+        <Input value={userLocation} handleChange={this.handleChange} />
         <Button onClick={() => this.startNewReport}>Report Incident</Button>
         <Button onClick={() => this.viewReports}>View Reports</Button>
       </div>
@@ -41,5 +43,14 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = storeState => ({ filter: storeState.filter })
-export default connect(mapStateToProps)(App)
+const mapStateToProps = storeState => ({
+  userLocation: storeState.locationReducer.userInput,
+  browserLocation: storeState.locationReducer.browserLocation,
+})
+
+const mapDispatchToProps = {
+  getUserLocation,
+  fetchLocation,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);
