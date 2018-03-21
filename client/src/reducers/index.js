@@ -1,16 +1,19 @@
 const defaultState = {
-    location: {
+    browserLocation: {
         lattitude: '',
         longitude: ''
     },
-    filter: ''
+    userInput: ''
 }
 
 const reducer = (state = defaultState, action) => {
     switch (action.type) {
-        case 'SET_FILTER':
+        case 'SET_LOCATION':
             return {
-                ...state, filter: action.payload
+                ...state, browserLocation:{
+                    lattitude: action.payload.lattitude,
+                    longitude: action.payload.longitude
+                }
             }
         default:
             return state

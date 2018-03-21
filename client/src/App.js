@@ -9,7 +9,7 @@ import Button from './components/Button'
 import PageTitle from './components/PageTitle';
 
 class App extends Component {
-  // componentDidMount() {
+  componentDidMount() {
   //     apiService
   //         .get('/someModels')
   //         .then(function (response) {
@@ -18,9 +18,21 @@ class App extends Component {
   //         .catch(function (error) {
   //             console.log(error);
   //         });
-  // }
-
-  changeFilter = ev => this.props.dispatch({ type: 'SET_FILTER', payload: ev.target.value })
+    const getLocation = () => {
+      if(navigator.geolocation) {
+       navigator.geolocation.getCurrentPosition((position)=>{
+        console.log(position.coords.latitude)
+        this.props.dispatch({ type: 'SET_LOCATION', payload: {
+          lattitude:position.coords.latitude,
+          longitude:position.coords.longitude
+        }});
+       });
+      }else{
+        this.props.dispatch({ type: 'SET_LOCATION', payload: {lattitude:"position failed to load"}});
+      }
+    }  
+    getLocation();
+  }
 
   startNewReport = () => { }
 
@@ -28,12 +40,12 @@ class App extends Component {
 
 
   render() {
-    const { filter } = this.props
+    const { browserLocation } = this.props
 
     return (
       <div className="App">
         <PageTitle>CatCall.io</PageTitle>
-        <Input value={filter} onChange={this.changeFilter} />
+        <Input value={String(browserLocation.lattitude)+String(browserLocation.longitude)}  />
         <Button onClick={() => this.startNewReport}>Report Incident</Button>
         <Button onClick={() => this.viewReports}>View Reports</Button>
       </div>
@@ -41,5 +53,5 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = storeState => ({ filter: storeState.filter })
+const mapStateToProps = storeState => ({ browserLocation: storeState.browserLocation })
 export default connect(mapStateToProps)(App)
