@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 import '../App.css';
 
+import PageTitle from '../components/PageTitle';
 import Input from '../components/Input'
 import Button from '../components/Button'
 
@@ -32,6 +33,7 @@ class MainPage extends Component {
 
     return (
       <div className="App">
+        <PageTitle>CatCall.io</PageTitle>
         <Input
           inputValue={location}
           handleChange={this.handleChange}
