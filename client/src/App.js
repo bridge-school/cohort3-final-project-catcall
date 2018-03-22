@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import apiService from './shared/services/api-service';
 
+import { getUserLocation, fetchLocation } from './actions/index';
 import './App.css';
 
 import Input from './components/Input'
@@ -9,43 +9,33 @@ import Button from './components/Button'
 import PageTitle from './components/PageTitle';
 
 class App extends Component {
+
   componentDidMount() {
-  //     apiService
-  //         .get('/someModels')
-  //         .then(function (response) {
-  //             console.log(response);
-  //         })
-  //         .catch(function (error) {
-  //             console.log(error);
-  //         });
-    const getLocation = () => {
-      if(navigator.geolocation) {
-       navigator.geolocation.getCurrentPosition((position)=>{
-        console.log(position.coords.latitude)
-        this.props.dispatch({ type: 'SET_LOCATION', payload: {
-          lattitude:position.coords.latitude,
-          longitude:position.coords.longitude
-        }});
-       });
-      }else{
-        this.props.dispatch({ type: 'SET_LOCATION', payload: {lattitude:"position failed to load"}});
-      }
-    }  
-    getLocation();
+    if (navigator.geolocation) {
+      this.props.fetchLocation(navigator.geolocation);
+    }
+  }
+
+  handleChange = (e) => {
+    this.props.getUserLocation(e.target.value);
   }
 
   startNewReport = () => { }
 
   viewReports = () => { }
 
-
   render() {
-    const { browserLocation } = this.props
+    const { browserLocation } = this.props;
+
+    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
 
     return (
       <div className="App">
         <PageTitle>CatCall.io</PageTitle>
-        <Input value={String(browserLocation.lattitude)+String(browserLocation.longitude)}  />
+        <Input
+          inputValue={location}
+          handleChange={this.handleChange}
+        />
         <Button onClick={() => this.startNewReport}>Report Incident</Button>
         <Button onClick={() => this.viewReports}>View Reports</Button>
       </div>
@@ -53,5 +43,14 @@ class App extends Component {
   }
 }
 
-const mapStateToProps = storeState => ({ browserLocation: storeState.browserLocation })
-export default connect(mapStateToProps)(App)
+const mapStateToProps = storeState => ({
+  userLocation: storeState.locationReducer.userInput,
+  browserLocation: storeState.locationReducer.browserLocation,
+})
+
+const mapDispatchToProps = {
+  getUserLocation,
+  fetchLocation,
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

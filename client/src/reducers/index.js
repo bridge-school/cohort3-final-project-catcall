@@ -1,18 +1,27 @@
-const defaultState = {
+import { combineReducers } from 'redux';
+import { ACTION_TYPES } from '../actions/index';
+
+const DEFAULT_STATE = {
     browserLocation: {
-        lattitude: '',
-        longitude: ''
+        latitude: '',
+        longitude: '',
     },
-    userInput: ''
+    userInput: '',
 }
 
-const reducer = (state = defaultState, action) => {
-    switch (action.type) {
-        case 'SET_LOCATION':
+export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
+    switch (type) {
+        case ACTION_TYPES.userLocation:
             return {
-                ...state, browserLocation:{
-                    lattitude: action.payload.lattitude,
-                    longitude: action.payload.longitude
+                ...state,
+                userInput: payload.location,
+            }
+        case ACTION_TYPES.getLocationSuccess:
+            return {
+                ...state,
+                browserLocation: {
+                    latitude: payload.latitude,
+                    longitude: payload.longitude,
                 }
             }
         default:
@@ -20,4 +29,6 @@ const reducer = (state = defaultState, action) => {
     }
 }
 
-export default reducer;
+export const rootReducer = combineReducers({
+    locationReducer,
+});
