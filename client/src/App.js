@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// import apiService from './shared/services/api-service';
 
 import { getUserLocation, fetchLocation } from './actions/index';
 import './App.css';
@@ -10,16 +9,12 @@ import Button from './components/Button'
 import PageTitle from './components/PageTitle';
 
 class App extends Component {
-  // componentDidMount() {
-  //     apiService
-  //         .get('/someModels')
-  //         .then(function (response) {
-  //             console.log(response);
-  //         })
-  //         .catch(function (error) {
-  //             console.log(error);
-  //         });
-  // }
+
+  componentDidMount() {
+    if (navigator.geolocation) {
+      this.props.fetchLocation(navigator.geolocation);
+    }
+  }
 
   handleChange = (e) => {
     this.props.getUserLocation(e.target.value);
@@ -30,12 +25,17 @@ class App extends Component {
   viewReports = () => { }
 
   render() {
-    const { userLocation } = this.props;
+    const { browserLocation } = this.props;
+
+    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
 
     return (
       <div className="App">
         <PageTitle>CatCall.io</PageTitle>
-        <Input value={userLocation} handleChange={this.handleChange} />
+        <Input
+          inputValue={location}
+          handleChange={this.handleChange}
+        />
         <Button onClick={() => this.startNewReport}>Report Incident</Button>
         <Button onClick={() => this.viewReports}>View Reports</Button>
       </div>

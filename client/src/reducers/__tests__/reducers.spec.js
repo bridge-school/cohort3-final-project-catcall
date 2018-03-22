@@ -40,7 +40,26 @@ describe('locationReducer', () => {
         })
     });
 
+    // async tests are hard
     test.skip('should handle GET_LOCATION_SUCCESS after fetching location is done', () => {
-        // async test here
+        expect.assertions(1);
+        const location = '43.654357 -79.4218942';
+
+        expect(
+            reducers.locationReducer(
+                {},
+                {
+                    type: ACTION_TYPES.getLocationSuccess,
+                    payload: {
+                        position
+                    }
+                }
+            )
+        ).toEqual({
+            browserLocation: {
+                latitude: position.coords.latitude,
+                longitude: position.coords.longitude,
+            }
+        })
     });
 })

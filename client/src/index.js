@@ -6,8 +6,6 @@ import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './App';
-// TODO What is this service worker and do we want to use it?
-// import registerServiceWorker from './registerServiceWorker';
 import { rootReducer } from './reducers/index';
 
 const store = createStore(

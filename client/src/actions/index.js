@@ -17,16 +17,13 @@ export const getUserLocation = (location) => {
 
 // Action for the thunk location API request
 export const fetchLocation = (location) => {
-    const API_URL = 'API HERE'
     return dispatch => {
         dispatch({ type: ACTION_TYPES.getLocationStart });
-        return fetch(API_URL)
-            .then(response => response.json())
-            .then(data => {
-                dispatch({ type: ACTION_TYPES.getLocationSuccess, payload: { data } })
-            })
-            .catch(error => {
-                dispatch({ type: ACTION_TYPES.getLocationError, payload: { data } })
+        return location.getCurrentPosition((position) => {
+            dispatch({
+                type: ACTION_TYPES.getLocationSuccess,
+                payload: position.coords
             });
+        });
     }
 }

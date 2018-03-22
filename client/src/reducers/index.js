@@ -20,8 +20,8 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
             return {
                 ...state,
                 browserLocation: {
-                    latitude: payload.data.latitude,
-                    longitude: payload.data.longitude,
+                    latitude: payload.latitude,
+                    longitude: payload.longitude,
                 }
             }
         default:

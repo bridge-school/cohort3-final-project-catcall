@@ -1,11 +1,12 @@
 import React from 'react';
 
-const Input = ({ handleChange, value }) => {
+const Input = ({ handleChange, inputValue }) => {
+    // const location = inputValue()
     return (
         <input
             type="text"
             onChange={(e) => handleChange(e)}
-            value={value}
+            value={inputValue}
             placeholder={"Enter incident location"}
         />
     );
@@ -14,6 +15,5 @@ const Input = ({ handleChange, value }) => {
 export default Input;
 
 // TODO add a label to input for accessibility
-/// TODO how is the filter activated? (Enter, Button, etc)
-// TODO add onSubmit function
+// TODO, this location enter + submit should ultimately be a form
 // TODO handle errors
