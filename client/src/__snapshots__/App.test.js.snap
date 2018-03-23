@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`renders correctly 1`] = `
+<div>
+  <div
+    className="App"
+  >
+    <div>
+      <img
+        alt="logo"
+        src="/imgs/logo.png"
+      />
+      <div>
+        <h1>
+          CatCall.io
+        </h1>
+        <a
+          href="/"
+          onClick={[Function]}
+        >
+          Home
+        </a>
+      </div>
+    </div>
+    <input
+      onChange={[Function]}
+      placeholder="Enter incident location"
+      type="text"
+      value="Loading location..."
+    />
+    <button
+      onClick={undefined}
+    >
+      <a
+        href="/report"
+        onClick={[Function]}
+      >
+        Report Incident
+      </a>
+    </button>
+    <button
+      onClick={undefined}
+    >
+      <a
+        href="/data"
+        onClick={[Function]}
+      >
+        View Reports
+      </a>
+    </button>
+  </div>
+</div>
+`;
