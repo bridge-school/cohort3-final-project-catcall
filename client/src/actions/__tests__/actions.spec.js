@@ -24,7 +24,7 @@ describe('fetchLocation', () => {
             { type: actions.ACTION_TYPES.getLocationStart },
             {
                 type: actions.ACTION_TYPES.getLocationSuccess,
-                payload: position.coords,
+                payload: location,
             }
         ]
 

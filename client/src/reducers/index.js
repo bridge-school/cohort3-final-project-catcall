@@ -6,7 +6,7 @@ const DEFAULT_STATE = {
         latitude: '',
         longitude: '',
     },
-    userInput: '',
+    userInput: 'hello',
 }
 
 export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {

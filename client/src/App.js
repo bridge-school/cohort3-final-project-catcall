@@ -1,56 +1,17 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
+import React from 'react';
+import { Route } from 'react-router';
 
-import { getUserLocation, fetchLocation } from './actions/index';
-import './App.css';
+import MainPage from './containers/MainPage';
 
-import Input from './components/Input'
-import Button from './components/Button'
-import PageTitle from './components/PageTitle';
+const ReportPage = () => <div>Report Page</div>;
+const DataPage = () => <div>Data Page</div>;
 
-class App extends Component {
+const App = () => (
+  <div>
+    <Route exact path="/" component={MainPage} />
+    <Route exact path="/report" component={ReportPage} />
+    <Route exact path="/data" component={DataPage} />
+  </div>
+);
 
-  componentDidMount() {
-    if (navigator.geolocation) {
-      this.props.fetchLocation(navigator.geolocation);
-    }
-  }
-
-  handleChange = (e) => {
-    this.props.getUserLocation(e.target.value);
-  }
-
-  startNewReport = () => { }
-
-  viewReports = () => { }
-
-  render() {
-    const { browserLocation } = this.props;
-
-    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
-
-    return (
-      <div className="App">
-        <PageTitle>CatCall.io</PageTitle>
-        <Input
-          inputValue={location}
-          handleChange={this.handleChange}
-        />
-        <Button onClick={() => this.startNewReport}>Report Incident</Button>
-        <Button onClick={() => this.viewReports}>View Reports</Button>
-      </div>
-    );
-  }
-}
-
-const mapStateToProps = storeState => ({
-  userLocation: storeState.locationReducer.userInput,
-  browserLocation: storeState.locationReducer.browserLocation,
-})
-
-const mapDispatchToProps = {
-  getUserLocation,
-  fetchLocation,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(App);
+export default App;
