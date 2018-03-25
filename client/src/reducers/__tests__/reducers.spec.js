@@ -40,25 +40,29 @@ describe('locationReducer', () => {
         })
     });
 
-    // async tests are hard
-    // test.skip('should handle GET_LOCATION_SUCCESS after fetching location is done', () => {
-    //     expect.assertions(1);
+    test('should handle GET_LOCATION_SUCCESS after fetching location is done', () => {
+        expect.assertions(1);
+        const location = {
+            latitude: '43.654357',
+            longitude: '-79.4218942',
+        };
 
-    //     expect(
-    //         reducers.locationReducer(
-    //             {},
-    //             {
-    //                 type: ACTION_TYPES.getLocationSuccess,
-    //                 payload: {
-    //                     position
-    //                 }
-    //             }
-    //         )
-    //     ).toEqual({
-    //         browserLocation: {
-    //             latitude: position.coords.latitude,
-    //             longitude: position.coords.longitude,
-    //         }
-    //     })
-    // });
-})
+        expect(
+            reducers.locationReducer(
+                {},
+                {
+                    type: ACTION_TYPES.getLocationSuccess,
+                    payload: {
+                        latitude: location.latitude,
+                        longitude: location.longitude,
+                    }
+                }
+            )
+        ).toEqual({
+            browserLocation: {
+                latitude: location.latitude,
+                longitude: location.longitude,
+            }
+        })
+    });
+});
