@@ -1,7 +1,7 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Input = ({ handleChange, inputValue }) => {
-    // const location = inputValue()
     return (
         <input
             type="text"
@@ -11,6 +11,11 @@ const Input = ({ handleChange, inputValue }) => {
         />
     );
 };
+
+Input.propTypes = {
+    handleChange: PropTypes.func.isRequired,
+    inputValue: PropTypes.string.isRequired,
+}
 
 export default Input;
 

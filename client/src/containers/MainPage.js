@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
@@ -45,6 +46,14 @@ class MainPage extends Component {
       </div>
     );
   }
+}
+
+MainPage.propTypes = {
+  browserLocation: PropTypes.object.isRequired,
+  userLocation: PropTypes.object.isRequired,
+  fetchLocation: PropTypes.func.isRequired,
+  getUserLocation: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired,
 }
 
 const mapStateToProps = storeState => ({

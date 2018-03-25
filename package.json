@@ -44,6 +44,7 @@
     "mongoose": "^5.0.8",
     "morgan": "~1.9.0",
     "npm": "^5.7.1",
+    "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-http-request": "^1.0.4",
