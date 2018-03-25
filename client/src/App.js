@@ -2,8 +2,8 @@ import React from 'react';
 import { Route } from 'react-router';
 
 import MainPage from './containers/MainPage';
+import ReportPage from './containers/ReportPage';
 
-const ReportPage = () => <div>Report Page</div>;
 const DataPage = () => <div>Data Page</div>;
 
 const App = () => (
