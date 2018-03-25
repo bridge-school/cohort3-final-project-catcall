@@ -11,11 +11,11 @@
 
 import React from 'react';
 import { connect } from 'react-redux';
-import { updateRating } from '../actions/index';
+import { updateRating, handleSubmitReport } from '../actions/index';
 
-const RatingForm = ({selectedRating, updateRating}) => {
+const RatingForm = ({ selectedRating, updateRating, handleSubmitReport }) => {
   return (
-    <form>
+    <form onSubmit={(e) => handleSubmitReport(e)}>
       <div className="emoji-buttons">
         <label>
           <input type="radio" value="1" checked={selectedRating === "1"} onChange={(e) => updateRating(e.target.value)}/>
@@ -38,6 +38,7 @@ const RatingForm = ({selectedRating, updateRating}) => {
           Option5
         </label>
       </div>
+      <input type="submit" value="Submit Report!"/>
     </form>
   );
 };
@@ -47,7 +48,8 @@ const mapStateToProps = storeState => ({
 });
 
 const mapDispatchToProps = {
-  updateRating
+  updateRating,
+  handleSubmitReport
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(RatingForm);
