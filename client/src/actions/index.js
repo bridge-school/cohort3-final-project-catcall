@@ -3,6 +3,7 @@ export const ACTION_TYPES = {
     getLocationStart: 'GET_LOCATION_START', // detecting browser location
     getLocationSuccess: 'GET_LOCATION_SUCCESS',
     getLocationError: 'GET_LOCATION_ERROR',
+    updateRating: 'UPDATE_RATING'
 };
 
 // Action for the user input
@@ -26,4 +27,11 @@ export const fetchLocation = (location) => {
             });
         });
     }
+}
+
+export const updateRating = (ratingValue) => {
+  return {
+    type: ACTION_TYPES.updateRating,
+    payload: ratingValue
+  }
 }
