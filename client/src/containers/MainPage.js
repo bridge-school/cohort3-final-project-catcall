@@ -10,6 +10,8 @@ import PageTitle from '../components/PageTitle';
 import Input from '../components/Input'
 import Button from '../components/Button'
 
+import MapContainer from './MapContainer'
+
 class MainPage extends Component {
 
   componentDidMount() {
@@ -39,18 +41,28 @@ class MainPage extends Component {
           handleChange={this.handleChange}
         />
         <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link>
-
-        </Button>
+        <Button><Link to="/data">View Reports</Link></Button>
+        <MapContainer />
       </div>
     );
   }
 }
 
-const mapStateToProps = storeState => ({
-  userLocation: storeState.rootReducer.locationReducer.userInput,
-  browserLocation: storeState.rootReducer.locationReducer.browserLocation,
+// const mapStateToProps = state => ({
+//   userLocation: state.userInput,
+//   browserLocation: state.browserLocation,
+// })
+const mapStateToProps = state => ({
+  userLocation: state.rootReducer.location.userInput,
+  browserLocation: state.rootReducer.location.browserLocation,
 })
+
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators(
+//     { getUserLocation: getUserLocation,
+//       fetchLocation: fetchLocation
+//     }, dispatch)
+// }
 
 const mapDispatchToProps = {
   getUserLocation,

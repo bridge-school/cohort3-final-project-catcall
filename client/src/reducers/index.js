@@ -1,6 +1,8 @@
 import { combineReducers } from 'redux';
 import { ACTION_TYPES } from '../actions/index';
 
+import MapReducer from './MapReducer';
+
 const DEFAULT_STATE = {
     browserLocation: {
         latitude: '',
@@ -30,5 +32,8 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
 }
 
 export const rootReducer = combineReducers({
-    locationReducer,
+    location: locationReducer,
+    pinLocation: MapReducer
 });
+
+export default rootReducer;
