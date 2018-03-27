@@ -5,10 +5,8 @@ import PropTypes from 'prop-types';
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
-import '../App.css';
-
-import Input from '../components/Input'
-import Button from '../components/Button'
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 class MainPage extends Component {
 
@@ -37,9 +35,11 @@ class MainPage extends Component {
           inputValue={location}
           handleChange={this.handleChange}
         />
-        <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link></Button>
-      </div>
+        {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
+          Links or via onClick handlers */}
+        <Button bsStyle="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
+        <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
+      </div >
     );
   }
 }
@@ -49,7 +49,7 @@ const mapStateToProps = state => ({
   browserLocation: state.rootReducer.location.browserLocation
 })
 
-  MainPage.propTypes = {
+MainPage.propTypes = {
   browserLocation: PropTypes.object.isRequired,
   userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
