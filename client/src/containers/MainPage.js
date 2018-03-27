@@ -5,11 +5,9 @@ import PropTypes from 'prop-types';
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
-import '../App.css';
-
 import PageTitle from '../components/PageTitle';
-import Input from '../components/Input'
-import Button from '../components/Button'
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 class MainPage extends Component {
 
@@ -39,10 +37,10 @@ class MainPage extends Component {
           inputValue={location}
           handleChange={this.handleChange}
         />
-        <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link>
-
-        </Button>
+        {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
+          Links or via onClick handlers */}
+        <Button style="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button>
+        <Button style="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
       </div>
     );
   }

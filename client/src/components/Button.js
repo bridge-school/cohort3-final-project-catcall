@@ -1,9 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import StyledButton from './styled/StyledButton';
 
-const Button = ({ onClick, children }) => {
+const Button = ({ onClick, children, style }) => {
     return (
-        <button onClick={onClick}>{children}</button>
+        <StyledButton bsStyle={style} onClick={onClick}>{children}</StyledButton>
     );
 };
 
