@@ -3,6 +3,8 @@ export const ACTION_TYPES = {
     getLocationStart: 'GET_LOCATION_START', // detecting browser location
     getLocationSuccess: 'GET_LOCATION_SUCCESS',
     getLocationError: 'GET_LOCATION_ERROR',
+    updateRating: 'UPDATE_RATING',
+    handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
 };
 
 // Action for the user input
@@ -26,4 +28,31 @@ export const fetchLocation = (location) => {
             });
         });
     }
+}
+
+export const updateRating = (ratingValue) => {
+  return {
+    type: ACTION_TYPES.updateRating,
+    payload: ratingValue
+  }
+}
+
+export const handleSubmitReport = (e) => {
+  e.preventDefault();
+  console.log('start sending report...');
+  return (dispatch, getState) => {
+    const reportState = getState().rootReducer;
+    const locationLat = reportState.locationReducer.browserLocation.latitude;
+    const locationLon = reportState.locationReducer.browserLocation.longitude;
+    const rating = reportState.ratingReducer.selectedRating;
+    const report = {
+      location: {
+        lat: locationLat,
+        lon: locationLon
+      },
+      rating
+    }
+    console.log(`report object is ${JSON.stringify(report)}`);
+    dispatch({ type: ACTION_TYPES.handleSubmitReport });
+  }
 }
