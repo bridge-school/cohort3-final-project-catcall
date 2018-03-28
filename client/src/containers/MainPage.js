@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
@@ -9,7 +10,6 @@ import '../App.css';
 import PageTitle from '../components/PageTitle';
 import Input from '../components/Input';
 import Button from '../components/Button';
-import Map from '../components/Map';
 
 class MainPage extends Component {
 
@@ -34,23 +34,29 @@ class MainPage extends Component {
 
     return (
       <div className="App">
-        <PageTitle>CatCall.io</PageTitle>
         <Input
           inputValue={location}
           handleChange={this.handleChange}
         />
         <Button><Link to="/report">Report Incident</Link></Button>
         <Button><Link to="/data">View Reports</Link></Button>
-        <Map coordinates={browserLocation}/> 
       </div>
     );
   }
 }
 
-const mapStateToProps = storeState => ({
-  userLocation: storeState.rootReducer.locationReducer.userInput,
-  browserLocation: storeState.rootReducer.locationReducer.browserLocation,
+const mapStateToProps = state => ({
+  userLocation: state.rootReducer.location.userInput,
+  browserLocation: state.rootReducer.location.browserLocation
 })
+
+  MainPage.propTypes = {
+  browserLocation: PropTypes.object.isRequired,
+  userLocation: PropTypes.object.isRequired,
+  fetchLocation: PropTypes.func.isRequired,
+  getUserLocation: PropTypes.func.isRequired,
+  location: PropTypes.object.isRequired
+}
 
 const mapDispatchToProps = {
   getUserLocation,
