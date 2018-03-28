@@ -1,10 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 
-// import components
 import RatingForm from './RatingForm';
 import MapContainer from './MapContainer'
-
 
 const Map = () => <div>Place the map here!</div>;
 
