@@ -29,6 +29,8 @@ class Map extends Component {
   }
 
   loadMap() {
+
+
     console.log(this.state.location);
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       const {google} = this.props; // sets props equal to google
@@ -36,12 +38,16 @@ class Map extends Component {
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
-      const locat = new google.maps.LatLng(this.state.location.lat,this.state.location.lng);
+      
+      //
+      const locat = new google.maps.LatLng(
+        this.props.location.browserLocation.latitude,
+        this.props.location.browserLocation.longitude);
 
 
       const mapConfig = Object.assign({}, {
         center: {lat: locat.lat(), lng: locat.lng()}, // sets center of google map to NYC.
-        zoom: 11, // sets zoom. Lower numbers are zoomed further out.
+        zoom: 14, // sets zoom. Lower numbers are zoomed further out.
         mapTypeId: 'roadmap' // optional main map layer. Terrain, satellite, hybrid or roadmap--if unspecified, defaults to roadmap.
       })
 
@@ -71,14 +77,12 @@ class Map extends Component {
       // })
 
     }
-
-
   }
 
   render() {
-    const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
-      width: '90vw', // 90vw basically means take up 90% of the width screen. px also works.
-      height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
+    const style = { 
+        width: '90vw', // 90vw basically means take up 90% of the width screen. px also works.
+        height: '75vh'
     }
 
     return ( // in our return function you must return a div with ref='map' and style.

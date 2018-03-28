@@ -1,4 +1,11 @@
+import configureMockStore from 'redux-mock-store';
+import thunk from 'redux-thunk';
 import * as actions from '../index';
+
+const middlewares = [thunk];
+const mockStore = configureMockStore(middlewares);
+const initialState = {};
+const store = mockStore(initialState);
 
 describe('getUserLocation', () => {
     test('should store the user inputted location', () => {
@@ -14,20 +21,19 @@ describe('getUserLocation', () => {
     })
 });
 
-// async tests are hard
 describe('fetchLocation', () => {
-    test.skip('should store the browser location', () => {
+    test('should store the browser location', () => {
         expect.assertions(1);
 
-        const location = '43.654357 -79.4218942';
-        const expected = [
-            { type: actions.ACTION_TYPES.getLocationStart },
-            {
-                type: actions.ACTION_TYPES.getLocationSuccess,
-                payload: location,
-            }
-        ]
+        const position = '43.654357 -79.4218942';
+        const mockGeolocation = {
+            getCurrentPosition: jest.fn(() => position),
+        };
 
-        expect(actions.fetchLocation(location)).toEqual(expected);
+        const expected = [{ type: actions.ACTION_TYPES.getLocationStart }];
+
+        store.dispatch(actions.fetchLocation(mockGeolocation));
+
+        expect(store.getActions()).toEqual(expected);
     })
 });

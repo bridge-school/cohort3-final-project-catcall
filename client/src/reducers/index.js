@@ -1,5 +1,6 @@
 import { combineReducers } from 'redux';
 import { ACTION_TYPES } from '../actions/index';
+import { ratingReducer } from './ratingReducer';
 
 import MapReducer from './MapReducer';
 
@@ -8,7 +9,7 @@ const DEFAULT_STATE = {
         latitude: '',
         longitude: '',
     },
-    userInput: 'hello',
+    userInput: '',
 }
 
 export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
@@ -33,7 +34,8 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
 
 export const rootReducer = combineReducers({
     location: locationReducer,
-    pinLocation: MapReducer
+    pinLocation: MapReducer,
+    ratingReducer
 });
 
 export default rootReducer;
