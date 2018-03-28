@@ -3,6 +3,7 @@ export const ACTION_TYPES = {
     getLocationStart: 'GET_LOCATION_START', // detecting browser location
     getLocationSuccess: 'GET_LOCATION_SUCCESS',
     getLocationError: 'GET_LOCATION_ERROR',
+    updatePinLocation: 'UPDATE_PIN_LOCATION',
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
 };
@@ -27,6 +28,18 @@ export const fetchLocation = (location) => {
                 payload: position.coords
             });
         });
+    }
+}
+
+export const updatePinLocation = (latitude, longitude) => {
+    return {
+        type: ACTION_TYPES.updatePinLocation,
+        payload: {
+            pinLocation: { 
+                latitude,
+                longitude
+            }
+        }
     }
 }
 

@@ -38,26 +38,24 @@ class MainPage extends Component {
           handleChange={this.handleChange}
         />
         <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link>
-
-        </Button>
+        <Button><Link to="/data">View Reports</Link></Button>
       </div>
     );
   }
 }
 
-MainPage.propTypes = {
+const mapStateToProps = state => ({
+  userLocation: state.rootReducer.location.userInput,
+  browserLocation: state.rootReducer.location.browserLocation
+})
+
+  MainPage.propTypes = {
   browserLocation: PropTypes.object.isRequired,
   userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
   getUserLocation: PropTypes.func.isRequired,
-  location: PropTypes.object.isRequired,
+  location: PropTypes.object.isRequired
 }
-
-const mapStateToProps = storeState => ({
-  userLocation: storeState.rootReducer.locationReducer.userInput,
-  browserLocation: storeState.rootReducer.locationReducer.browserLocation,
-})
 
 const mapDispatchToProps = {
   getUserLocation,
