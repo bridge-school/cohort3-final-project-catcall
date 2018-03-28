@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 import '../App.css';
 
 import PageTitle from '../components/PageTitle';
-import Input from '../components/Input'
-import Button from '../components/Button'
+import Input from '../components/Input';
+import Button from '../components/Button';
+import Map from '../components/Map';
 
 class MainPage extends Component {
 
@@ -39,9 +40,8 @@ class MainPage extends Component {
           handleChange={this.handleChange}
         />
         <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link>
-
-        </Button>
+        <Button><Link to="/data">View Reports</Link></Button>
+        <Map coordinates={browserLocation}/> 
       </div>
     );
   }

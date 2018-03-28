@@ -3,8 +3,8 @@ import { ACTION_TYPES } from '../actions/index';
 
 const DEFAULT_STATE = {
     browserLocation: {
-        latitude: '',
-        longitude: '',
+        lat: 43.653226,
+        lng: -79.383184
     },
     userInput: 'hello',
 }
@@ -20,8 +20,8 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
             return {
                 ...state,
                 browserLocation: {
-                    latitude: payload.latitude,
-                    longitude: payload.longitude,
+                    lat: payload.latitude,
+                    lng: payload.longitude,
                 }
             }
         default:
