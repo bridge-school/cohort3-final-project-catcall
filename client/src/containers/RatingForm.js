@@ -14,13 +14,14 @@ const RatingForm = ({ handleSubmitReport }) => {
         <EmojiButtonContainer reaction="fearful" />
         <EmojiButtonContainer reaction="scream" />
       </div>
-      <input type="submit" value="Submit Report!"/>
+      {/* TH: I believe this should be replaced with a Button component */}
+      <input type="submit" value="Submit Report!" />
     </form>
   );
 };
 
 const mapDispatchToProps = {
-    handleSubmitReport
+  handleSubmitReport
 };
 
 export default connect(null, mapDispatchToProps)(RatingForm);

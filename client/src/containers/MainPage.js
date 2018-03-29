@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
+import StyledGrid from '../components/styled/StyledGrid';
+import StyledRow from '../components/styled/StyledRow';
+import StyledCol from '../components/styled/StyledCol';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
@@ -31,14 +34,26 @@ class MainPage extends Component {
 
     return (
       <div className="App">
-        <Input
-          inputValue={location}
-          handleChange={this.handleChange}
-        />
-        {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
+        <StyledGrid>
+          <StyledRow>
+            <StyledCol xs={12} lg={12}>
+              <Input
+                inputValue={location}
+                handleChange={this.handleChange}
+              />
+            </StyledCol>
+          </StyledRow>
+          <StyledRow>
+            <StyledCol xs={12} sm={12} md={6} lg={6}>
+              {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
           Links or via onClick handlers */}
-        <Button bsStyle="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
-        <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
+              <Button bsStyle="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
+            </StyledCol>
+            <StyledCol xs={12} sm={12} md={6} lg={6}>
+              <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
+            </StyledCol>
+          </StyledRow>
+        </StyledGrid>
       </div >
     );
   }
