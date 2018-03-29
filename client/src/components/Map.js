@@ -1,42 +1,14 @@
 import React, { Component } from 'react';
 import {GoogleApiWrapper} from 'google-maps-react';
-
-//const MapContainer = ({ coordinates }) => {
-//    return (
- //     <Map 
- //       google={window.google} 
-  //      zoom={14} 
-  //      style={{width: '100%', height: '50%', position: 'relative'}} 
-   //     center={ coordinates } >
-  //      
-  //      <Marker 
-  //        onClick={this.onMarkerClick} 
-  //        name={'Current location'} 
-   //       position={ coordinates } />
-   //   
-  //    </Map>
-  //  );
-//}
- 
-
-
 import ReactDOM from 'react-dom'
 
 class Map extends Component {
-
-  state = {
-      location: {
-        lat: this.props.location.browserLocation.latitude, 
-        lng: this.props.location.browserLocation.longitude
-      } 
-  }
 
   componentDidUpdate() {
     this.loadMap(); // call loadMap function to load the google map
   }
 
   loadMap() {
-    console.log(this.state.location);
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       const {google} = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
@@ -45,9 +17,8 @@ class Map extends Component {
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
       
       const locat = new google.maps.LatLng(
-        this.props.location.browserLocation.latitude,
-        this.props.location.browserLocation.longitude);
-
+        this.props.location.lat,
+        this.props.location.lng);
 
       const mapConfig = Object.assign({}, {
         center: {lat: locat.lat(), lng: locat.lng()}, 
@@ -63,17 +34,13 @@ class Map extends Component {
           title: "Home", //TODO: update this title 
           draggable: true 
         });
-        
-        marker.addListener('dragstart', function() {
-
-        });
 
         marker.addListener('dragend', () => {
-            var position = marker.getPosition()
-            var latitude = position.lat()
-            var longitude = position.lng()
+            let position = marker.getPosition()
+            let latitude = position.lat()
+            let longitude = position.lng()
             this.props.updatePinLocation(latitude, longitude);
-        });
+        });        
     }
   }
 

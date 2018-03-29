@@ -1,7 +1,7 @@
 import { ACTION_TYPES } from '../actions/index';
 
 const DEFAULT_STATE = {
-  selectedRating: null
+    selectedRating: null
 }
 
 export const ratingReducer = (state = DEFAULT_STATE, { type, payload }) => {
@@ -15,3 +15,4 @@ export const ratingReducer = (state = DEFAULT_STATE, { type, payload }) => {
             return state
     }
 }
+

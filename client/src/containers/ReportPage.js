@@ -4,8 +4,6 @@ import { connect } from 'react-redux';
 import RatingForm from './RatingForm';
 import MapContainer from './MapContainer'
 
-const Map = () => <div>Place the map here!</div>;
-
 const ReportPage = () => {
   return (
     <div className="page">

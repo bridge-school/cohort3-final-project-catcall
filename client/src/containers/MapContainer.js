@@ -3,35 +3,38 @@ import { connect } from 'react-redux';
 
 import Map from '../components/Map';
 
-import { updatePinLocation } from '../actions/index';
+import { getUserLocation, updatePinLocation } from '../actions/index';
 import { bindActionCreators } from 'redux';
 
-  class MapContainer extends Component {
-    render() {
-      const { updatePinLocation, location, pinLocation } = this.props;
-      return (
+class MapContainer extends Component {
+  render() {
+    const { getUserLocation, updatePinLocation } = this.props;
+    return (
+      <div>
         <div>
-          <div>
-            <h3>Latitude: {this.props.pinLocation.latitude}</h3>
-            <h3>Longitude: {this.props.pinLocation.longitude}</h3>
-          </div>
-          <Map
-            google={this.props.google}
-            updatePinLocation={updatePinLocation}
-            location={location}
-            pinLocation={pinLocation} />
+          <h3>Latitude: {this.props.loc.lat}</h3>
+          <h3>Longitude: {this.props.loc.lng}</h3>
         </div>
-      );
-    }
+        <Map
+          google={this.props.google}
+          getUserLocation={getUserLocation}
+          location={this.props.loc}
+          updatePinLocation={updatePinLocation}
+        />
+      </div>
+    );
   }
+}
 
 const mapStateToProps = (state) => ({
-  location: state.rootReducer.location,
-  pinLocation: state.rootReducer.pinLocation
+  loc: state.rootReducer.locationReducer.loc
 })
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ updatePinLocation: updatePinLocation }, dispatch)
+    return bindActionCreators({ 
+      getUserLocation: getUserLocation,
+      updatePinLocation: updatePinLocation,
+    }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);

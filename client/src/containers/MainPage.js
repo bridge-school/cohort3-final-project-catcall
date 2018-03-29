@@ -7,7 +7,6 @@ import { Link } from 'react-router-dom';
 
 import '../App.css';
 
-import PageTitle from '../components/PageTitle';
 import Input from '../components/Input';
 import Button from '../components/Button';
 
@@ -28,9 +27,9 @@ class MainPage extends Component {
   viewReports = () => { }
 
   render() {
-    const { browserLocation } = this.props;
+    const { loc } = this.props;
 
-    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
+    const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     return (
       <div className="App">
@@ -39,20 +38,22 @@ class MainPage extends Component {
           handleChange={this.handleChange}
         />
         <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link></Button>
+        <Button><Link to="/data">View Reports</Link>
+
+        </Button>
       </div>
     );
   }
 }
 
 const mapStateToProps = state => ({
-  userLocation: state.rootReducer.location.userInput,
-  browserLocation: state.rootReducer.location.browserLocation
+  userLocation: state.rootReducer.locationReducer.userInput,
+  loc: state.rootReducer.locationReducer.loc
 })
 
   MainPage.propTypes = {
-  browserLocation: PropTypes.object.isRequired,
-  userLocation: PropTypes.object.isRequired,
+  loc: PropTypes.object.isRequired,
+  //userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
   getUserLocation: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
@@ -62,5 +63,6 @@ const mapDispatchToProps = {
   getUserLocation,
   fetchLocation,
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
