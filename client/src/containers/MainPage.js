@@ -60,7 +60,7 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  userLocation: state.rootReducer.locationReducer.userInput,
+  //userLocation: state.rootReducer.locationReducer.userInput,
   loc: state.rootReducer.locationReducer.loc
 })
 

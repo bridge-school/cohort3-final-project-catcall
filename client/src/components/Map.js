@@ -17,8 +17,8 @@ class Map extends Component {
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const locat = new google.maps.LatLng(
-        this.props.location.browserLocation.latitude,
-        this.props.location.browserLocation.longitude);
+        this.props.location.lat,
+        this.props.location.lng);
 
       // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
       // I don't believe Bootstrap + Styled-Components would apply here
