@@ -5,10 +5,11 @@ import PropTypes from 'prop-types';
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
-import '../App.css';
-
-import Input from '../components/Input'
-import Button from '../components/Button'
+import StyledGrid from '../components/styled/StyledGrid';
+import StyledRow from '../components/styled/StyledRow';
+import StyledCol from '../components/styled/StyledCol';
+import Input from '../components/Input';
+import Button from '../components/Button';
 
 class MainPage extends Component {
 
@@ -27,31 +28,45 @@ class MainPage extends Component {
   viewReports = () => { }
 
   render() {
-    const { browserLocation } = this.props;
+    const { loc } = this.props;
 
-    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
+    const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     return (
       <div className="App">
-        <Input
-          inputValue={location}
-          handleChange={this.handleChange}
-        />
-        <Button><Link to="/report">Report Incident</Link></Button>
-        <Button><Link to="/data">View Reports</Link></Button>
-      </div>
+        <StyledGrid>
+          <StyledRow>
+            <StyledCol xs={12} lg={12}>
+              <Input
+                inputValue={location}
+                handleChange={this.handleChange}
+              />
+            </StyledCol>
+          </StyledRow>
+          <StyledRow>
+            <StyledCol xs={12} sm={12} md={6} lg={6}>
+              {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
+          Links or via onClick handlers */}
+              <Button bsStyle="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
+            </StyledCol>
+            <StyledCol xs={12} sm={12} md={6} lg={6}>
+              <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
+            </StyledCol>
+          </StyledRow>
+        </StyledGrid>
+      </div >
     );
   }
 }
 
 const mapStateToProps = state => ({
-  userLocation: state.rootReducer.location.userInput,
-  browserLocation: state.rootReducer.location.browserLocation
+  userLocation: state.rootReducer.locationReducer.userInput,
+  loc: state.rootReducer.locationReducer.loc
 })
 
   MainPage.propTypes = {
-  browserLocation: PropTypes.object.isRequired,
-  userLocation: PropTypes.object.isRequired,
+  loc: PropTypes.object.isRequired,
+  //userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
   getUserLocation: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
@@ -61,5 +76,6 @@ const mapDispatchToProps = {
   getUserLocation,
   fetchLocation,
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);
