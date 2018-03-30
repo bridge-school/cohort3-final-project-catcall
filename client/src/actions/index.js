@@ -54,8 +54,8 @@ export const handleSubmitReport = (e) => {
   console.log('start sending report...');
   return (dispatch, getState) => {
     const reportState = getState().rootReducer;
-    const locationLat = reportState.locationReducer.browserLocation.latitude;
-    const locationLon = reportState.locationReducer.browserLocation.longitude;
+    const locationLat = reportState.locationReducer.lat;
+    const locationLon = reportState.locationReducer.lng;
     const rating = reportState.ratingReducer.selectedRating;
     const report = {
       loc: {
