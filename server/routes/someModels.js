@@ -5,7 +5,7 @@ import SomeModel from '../models/someModel';
 const router = express.Router();
 
 /* GET someModels listing. */
-router.get('/', function(req, res, next) {
+router.get('/', function (req, res, next) {
     return SomeModel
         // we are providing the empty object to mean we are not giving any constraints -- we want them all!
         .find({})
@@ -18,7 +18,8 @@ router.get('/', function(req, res, next) {
 });
 
 /* POST a someModel. (This will create one in the database, if successful) */
-router.post('/:name', function(req, res, next) {
+router.post('/report', function (req, res, next) {
+    console.log('hiiii', req)
     const someModel = new SomeModel({ name: req.params.name });
 
     someModel.save()
@@ -31,8 +32,8 @@ router.post('/:name', function(req, res, next) {
 });
 
 /* DELETE a someModel. (This will remove one in the database, if successful) */
-router.delete('/:name', function(req, res, next) {
-    SomeModel.remove({name: req.params.name})
+router.delete('/:name', function (req, res, next) {
+    SomeModel.remove({ name: req.params.name })
         .then(
             () => res
                 .status(200) // explicitly set the status code to 201 to indicate the request was successful
