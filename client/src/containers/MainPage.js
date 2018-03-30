@@ -28,9 +28,9 @@ class MainPage extends Component {
   viewReports = () => { }
 
   render() {
-    const { browserLocation } = this.props;
+    const { loc } = this.props;
 
-    const location = browserLocation && browserLocation.latitude && browserLocation.longitude ? `${browserLocation.latitude} ${browserLocation.longitude}` : 'Loading location...';
+    const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     return (
       <div className="App">
@@ -60,13 +60,13 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  userLocation: state.rootReducer.location.userInput,
-  browserLocation: state.rootReducer.location.browserLocation
+  userLocation: state.rootReducer.locationReducer.userInput,
+  loc: state.rootReducer.locationReducer.loc
 })
 
-MainPage.propTypes = {
-  browserLocation: PropTypes.object.isRequired,
-  userLocation: PropTypes.object.isRequired,
+  MainPage.propTypes = {
+  loc: PropTypes.object.isRequired,
+  //userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
   getUserLocation: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired
@@ -76,5 +76,6 @@ const mapDispatchToProps = {
   getUserLocation,
   fetchLocation,
 };
+
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainPage);

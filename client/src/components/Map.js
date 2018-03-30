@@ -1,24 +1,14 @@
 import React, { Component } from 'react';
+import {GoogleApiWrapper} from 'google-maps-react';
 import ReactDOM from 'react-dom'
 
-import { GoogleApiWrapper } from 'google-maps-react'
 class Map extends Component {
-
-  state = {
-    location: {
-      lat: this.props.location.browserLocation.latitude,
-      lng: this.props.location.browserLocation.longitude
-    }
-  }
 
   componentDidUpdate() {
     this.loadMap(); // call loadMap function to load the google map
   }
 
   loadMap() {
-
-
-    console.log(this.state.location);
     if (this.props && this.props.google) { // checks to make sure that props have been passed
       const { google } = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
@@ -36,7 +26,7 @@ class Map extends Component {
       // the current one, once a design standard is decided on
       const mapConfig = Object.assign({}, {
         center: { lat: locat.lat(), lng: locat.lng() },
-        zoom: 14,
+        zoom: 18,
         mapTypeId: 'roadmap',
         styles: [
           { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -62,23 +52,19 @@ class Map extends Component {
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
 
-      const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-        position: { lat: locat.lat(), lng: locat.lng() },
-        map: this.map, // sets markers to appear on the map we just created on line 35
-        title: "Home", //TODO: update this title 
-        draggable: true
-      });
+        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+          position: {lat: locat.lat(), lng: locat.lng()}, 
+          map: this.map, // sets markers to appear on the map we just created on line 35
+          title: "Home", //TODO: update this title 
+          draggable: true 
+        });
 
-      marker.addListener('dragstart', function () {
-
-      });
-
-      marker.addListener('dragend', () => {
-        var position = marker.getPosition()
-        var latitude = position.lat()
-        var longitude = position.lng()
-        this.props.updatePinLocation(latitude, longitude);
-      });
+        marker.addListener('dragend', () => {
+            let position = marker.getPosition()
+            let latitude = position.lat()
+            let longitude = position.lng()
+            this.props.updatePinLocation(latitude, longitude);
+        });        
     }
   }
 
@@ -98,5 +84,5 @@ class Map extends Component {
 }
 
 export default GoogleApiWrapper({
-  apiKey: 'AIzaSyA-gMsKVvKdp63xHF1AGfQ-r65vQV4Jsh4',
-})(Map);
+  apiKey: ('AIzaSyA06nlgcoEtxl0TMQeh0Sm4DQjZh6gV_mA')
+})(Map)

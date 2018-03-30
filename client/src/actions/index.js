@@ -3,17 +3,18 @@ export const ACTION_TYPES = {
     getLocationStart: 'GET_LOCATION_START', // detecting browser location
     getLocationSuccess: 'GET_LOCATION_SUCCESS',
     getLocationError: 'GET_LOCATION_ERROR',
-    updatePinLocation: 'UPDATE_PIN_LOCATION',
+    updatePinLocation: 'USER_LOCATION',
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
 };
 
 // Action for the user input
-export const getUserLocation = (location) => {
+export const getUserLocation = (latitude, longitude) => {
     return {
         type: ACTION_TYPES.userLocation,
         payload: {
-            location,
+            latitude,
+            longitude
         },
     }
 }
@@ -34,11 +35,9 @@ export const fetchLocation = (location) => {
 export const updatePinLocation = (latitude, longitude) => {
     return {
         type: ACTION_TYPES.updatePinLocation,
-        payload: {
-            pinLocation: { 
+        payload: { 
                 latitude,
                 longitude
-            }
         }
     }
 }
@@ -59,7 +58,7 @@ export const handleSubmitReport = (e) => {
     const locationLon = reportState.locationReducer.browserLocation.longitude;
     const rating = reportState.ratingReducer.selectedRating;
     const report = {
-      location: {
+      loc: {
         lat: locationLat,
         lon: locationLon
       },
