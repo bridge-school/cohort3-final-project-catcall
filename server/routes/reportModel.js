@@ -23,18 +23,17 @@ router.get('/', function (req, res, next) {
 
 /* POST a someModel. (This will create one in the database, if successful) */
 router.post('/report', function (req, res, next) {
-    console.log('hiiii', req)
     const reportIncident = new Report({
-        emotion: req.params.emotion,
-        latitude: req.params.latitude,
-        longitude: req.params.longitude,
+        emotion: req.body.emotion,
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
     });
 
     reportIncident.save()
         .then(
             () => res
                 .status(201) // explicitly set the status code to 201 to indicate an entry was successfully created
-                .send(`Successfully created the model with name '${req.params.name}'! Try and view all the models now!`)
+                .send(`Successfully created the model!`)
         )
         .catch(err => next(err));
 });

@@ -73,14 +73,13 @@ export const handleSubmitReport = () => {
             longitude: locationLon,
         })
             .then(response => {
-                console.log(response)
                 dispatch({
                     type: ACTION_TYPES.handleSubmitReport,
                     payload: report,
                 });
             })
             .catch(error => {
-                console.log(error)
+                console.error(error)
             })
     }
 }

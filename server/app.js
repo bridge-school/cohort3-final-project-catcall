@@ -31,7 +31,7 @@ if (process.env.npm_lifecycle_event.endsWith('dev')) {
 }
 
 app.use('/', mainRouter);
-app.use('/report', reportsRouter);
+app.use('/api', reportsRouter);
 
 // catch 404 and forward to error handler
 app.use(notFoundHandler);
