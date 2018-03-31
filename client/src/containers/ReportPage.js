@@ -1,22 +1,17 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import React, { Component } from 'react';
 
 import RatingForm from './RatingForm';
 import MapContainer from './MapContainer'
 
-const ReportPage = () => {
-  return (
-    <div className="page">
-      <MapContainer />
-      <RatingForm />
-    </div>
-  );
-};
+class ReportPage extends Component {
+  render() {
+    return (
+      <div className="page">
+        <MapContainer />
+        <RatingForm push={this.props.history.push} />
+      </div>
+    );
+  }
+}
 
-const mapStateToProps = storeState => ({
-});
-
-const mapDispatchToProps = {
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(ReportPage);
+export default ReportPage;
