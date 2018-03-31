@@ -3,7 +3,7 @@ import StyledImage from './styled/StyledImage';
 
 const Image = ({ src, alt }) => {
     return (
-        <StyledImage src='/imgs/logo.png' alt='logo' responsive />
+        <img src='/imgs/logo.png' alt='logo' className="d-inline-block align-top" responsive />
     );
 };
 
