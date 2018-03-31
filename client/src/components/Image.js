@@ -1,5 +1,5 @@
 import React from 'react';
-import StyledImage from './styled/StyledImage';
+// import StyledImage from './styled/StyledImage';
 
 const Image = ({ src, alt }) => {
     return (
