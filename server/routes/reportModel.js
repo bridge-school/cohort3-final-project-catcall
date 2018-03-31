@@ -1,24 +1,27 @@
 import express from 'express';
 
-import SomeModel from '../models/someModel';
+import { Report, ReportItem } from '../models/reportModel';
 
 const router = express.Router();
 
 /* GET someModels listing. */
-router.get('/', function(req, res, next) {
-    return SomeModel
+router.get('/', function (req, res, next) {
+    return Report
         // we are providing the empty object to mean we are not giving any constraints -- we want them all!
         .find({})
         .then(
-            someModels => res
-                .status(200) // explicitly set the status code to 200 to indicate the request was successful
-                .send(someModels)
+            results => {
+                console.log(JSON.stringify(results, null, 4))
+                res
+                    .status(200) // explicitly set the status code to 200 to indicate the request was successful
+                    .send(results)
+            }
         )
         .catch(err => next(err)); // if we get an error, propagate the error to the next middleware
 });
 
 /* POST a someModel. (This will create one in the database, if successful) */
-router.post('/:name', function(req, res, next) {
+router.post('/:name', function (req, res, next) {
     const someModel = new SomeModel({ name: req.params.name });
 
     someModel.save()
@@ -31,8 +34,8 @@ router.post('/:name', function(req, res, next) {
 });
 
 /* DELETE a someModel. (This will remove one in the database, if successful) */
-router.delete('/:name', function(req, res, next) {
-    SomeModel.remove({name: req.params.name})
+router.delete('/:name', function (req, res, next) {
+    SomeModel.remove({ name: req.params.name })
         .then(
             () => res
                 .status(200) // explicitly set the status code to 201 to indicate the request was successful

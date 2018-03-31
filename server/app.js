@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
 import mainRouter from './routes/index';
-import usersRouter from './routes/someModels';
+import reportsRouter from './routes/reportModel';
 
 import connectToDb from './config/db';
 import logger from './config/logger';
@@ -22,7 +22,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 
 if (process.env.npm_lifecycle_event.endsWith('dev')) {
-    app.use(function(req, res, next) {
+    app.use(function (req, res, next) {
         // allow requests from the dev server
         res.header('Access-Control-Allow-Origin', 'http://localhost:3000');
         res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -31,7 +31,7 @@ if (process.env.npm_lifecycle_event.endsWith('dev')) {
 }
 
 app.use('/', mainRouter);
-app.use('/api/someModels', usersRouter);
+app.use('/api/reports', reportsRouter);
 
 // catch 404 and forward to error handler
 app.use(notFoundHandler);
