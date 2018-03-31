@@ -5,7 +5,7 @@ import bodyParser from 'body-parser';
 import helmet from 'helmet';
 
 import mainRouter from './routes/index';
-import usersRouter from './routes/someModels';
+import reportsRouter from './routes/reportModel';
 
 import connectToDb from './config/db';
 import logger from './config/logger';
@@ -31,7 +31,7 @@ if (process.env.npm_lifecycle_event.endsWith('dev')) {
 }
 
 app.use('/', mainRouter);
-app.use('/api/someModels', usersRouter);
+app.use('/report', reportsRouter);
 
 // catch 404 and forward to error handler
 app.use(notFoundHandler);

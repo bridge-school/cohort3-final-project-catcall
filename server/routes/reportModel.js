@@ -1,18 +1,22 @@
 import express from 'express';
 
-import SomeModel from '../models/someModel';
+import { Report } from '../models/reportModel';
 
 const router = express.Router();
 
 /* GET someModels listing. */
 router.get('/', function (req, res, next) {
-    return SomeModel
+
+    return Report
         // we are providing the empty object to mean we are not giving any constraints -- we want them all!
         .find({})
         .then(
-            someModels => res
-                .status(200) // explicitly set the status code to 200 to indicate the request was successful
-                .send(someModels)
+            results => {
+                console.log(JSON.stringify(results, null, 4))
+                res
+                    .status(200) // explicitly set the status code to 200 to indicate the request was successful
+                    .send(results)
+            }
         )
         .catch(err => next(err)); // if we get an error, propagate the error to the next middleware
 });
@@ -20,9 +24,13 @@ router.get('/', function (req, res, next) {
 /* POST a someModel. (This will create one in the database, if successful) */
 router.post('/report', function (req, res, next) {
     console.log('hiiii', req)
-    const someModel = new SomeModel({ name: req.params.name });
+    const reportIncident = new Report({
+        emotion: req.params.emotion,
+        latitude: req.params.latitude,
+        longitude: req.params.longitude,
+    });
 
-    someModel.save()
+    reportIncident.save()
         .then(
             () => res
                 .status(201) // explicitly set the status code to 201 to indicate an entry was successfully created
@@ -33,7 +41,7 @@ router.post('/report', function (req, res, next) {
 
 /* DELETE a someModel. (This will remove one in the database, if successful) */
 router.delete('/:name', function (req, res, next) {
-    SomeModel.remove({ name: req.params.name })
+    Report.remove({ name: req.params.name })
         .then(
             () => res
                 .status(200) // explicitly set the status code to 201 to indicate the request was successful
@@ -43,4 +51,3 @@ router.delete('/:name', function (req, res, next) {
 });
 
 export default router;
-
