@@ -8,6 +8,7 @@ export const ACTION_TYPES = {
     updatePinLocation: 'USER_LOCATION',
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
+    getUserReports: 'GET_USER_REPORTS',
 };
 
 // Action for the user input
@@ -81,5 +82,24 @@ export const handleSubmitReport = () => {
             .catch(error => {
                 console.error(error)
             })
+    }
+}
+
+// // Action Thunk (copy) for getting user reports
+export const getUserReports = () => {
+    return (dispatch) => {
+        ApiService.get('/')
+        .then(response => {
+            console.log("THIS IS A TEST")
+            console.log(response.data)
+            return dispatch({
+                type: ACTION_TYPES.getUserReports,
+                payload: response.data,
+            });
+            
+        })
+        .catch(error => {
+            console.error(error)
+        });
     }
 }

@@ -12,7 +12,7 @@ router.get('/', function (req, res, next) {
         .find({})
         .then(
             results => {
-                console.log(JSON.stringify(results, null, 4))
+                // console.log(JSON.stringify(results, null, 4))
                 res
                     .status(200) // explicitly set the status code to 200 to indicate the request was successful
                     .send(results)
