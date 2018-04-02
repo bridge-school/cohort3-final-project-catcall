@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { getUserReports } from '../actions/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import RatingForm from './RatingForm';
-// import MapContainer from './MapContainer'
 
 
 // console.log(this.props.reports)
@@ -20,7 +18,6 @@ class ViewReportsPage extends Component {
           <h1>View Report Page</h1>
           <div>
           {JSON.stringify(reports)}
-          {/* {this.props.reports.map((report) => <li>{report}</li>)} */}
           </div>
     
         </div>
@@ -42,4 +39,3 @@ const mapDispatchToProps = {
 
 export default connect(mapStateToProps, mapDispatchToProps)(ViewReportsPage);
 
-// export default ViewReportsPage;
