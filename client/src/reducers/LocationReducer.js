@@ -5,7 +5,7 @@ const DEFAULT_STATE = {
         lat: 43.653226,
         lng: -79.383184
     },
-    userInput: {}
+    userInput: "Current Location"
 }
 
 export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
@@ -13,10 +13,7 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
         case ACTION_TYPES.userLocation: // input updating location
             return {
                 ...state,
-                loc: {
-                    lat: payload.latitude,
-                    lng: payload.longitude,
-                }
+                loc: payload
             }
         case ACTION_TYPES.getLocationSuccess: // browser location is updating
             return {
@@ -33,6 +30,12 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
                     lat: payload.latitude,
                     lng: payload.longitude,
                 }
+            }
+        case ACTION_TYPES.getUserInput: // input updating location
+            return {
+                ...state,
+                userInput: payload
+                
             }
         default:
             return state

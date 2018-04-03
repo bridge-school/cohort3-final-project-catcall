@@ -8,8 +8,9 @@ import { Link } from 'react-router-dom';
 import StyledGrid from '../components/styled/StyledGrid';
 import StyledRow from '../components/styled/StyledRow';
 import StyledCol from '../components/styled/StyledCol';
-import Input from '../components/Input';
+//import Input from '../components/Input';
 import Button from '../components/Button';
+import SimpleForm from '../components/Searchbar';
 
 class MainPage extends Component {
 
@@ -19,28 +20,25 @@ class MainPage extends Component {
     }
   }
 
-  handleChange = (e) => {
-    this.props.getUserLocation(e.target.value);
-  }
+  //handleChange = (e) => {
+  //  this.props.getUserLocation(e.target.value);
+  //}
 
   startNewReport = () => { }
 
   viewReports = () => { }
 
   render() {
-    const { loc } = this.props;
-
-    const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
+    //const { loc } = this.props;
+    //const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     return (
       <div className="App">
         <StyledGrid>
           <StyledRow>
             <StyledCol xs={12} lg={12}>
-              <Input
-                inputValue={location}
-                handleChange={this.handleChange}
-              />
+            {/* <Input inputValue={location} handleChange={this.handleChange} /> */}
+            <SimpleForm/>
             </StyledCol>
           </StyledRow>
           <StyledRow>
@@ -54,6 +52,7 @@ class MainPage extends Component {
             </StyledCol>
           </StyledRow>
         </StyledGrid>
+        
       </div >
     );
   }
