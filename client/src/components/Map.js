@@ -23,6 +23,7 @@ constructor(props) {
         this.props.location.lat,
         this.props.location.lng
       );
+      let marker;
       // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
       // I don't believe Bootstrap + Styled-Components would apply here
       // styles can be better generated through https://mapstyle.withgoogle.com/ and have "styles" property imported here to replace 
@@ -58,19 +59,21 @@ constructor(props) {
         maps.event.addListener(this.map, 'idle', () => {
           this.setState({ mapLoaded: true });
         });
-        this.marker = new maps.Marker({ 
+        marker = new maps.Marker({ 
           position: {lat: locat.lat(), lng: locat.lng()}, 
           map: this.map, 
           draggable: true 
         });
       }
-
-      this.marker.addListener('dragend', () => {
-        let position = this.marker.getPosition()
-        let latitude = position.lat()
-        let longitude = position.lng()
-        this.props.updatePinLocation(latitude, longitude);
-      });
+      
+      if (marker){
+        marker.addListener('dragend', () => {
+          let position = marker.getPosition()
+          let latitude = position.lat()
+          let longitude = position.lng()
+          this.props.updatePinLocation(latitude, longitude);
+        });
+      }
     }
   }
 
