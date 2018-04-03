@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 
+import ViewMapContainer from '../containers/ViewMapContainer';
+
 // console.log(this.props.reports)
 class ViewReportsPage extends Component {
   componentDidMount() {
@@ -17,8 +19,10 @@ class ViewReportsPage extends Component {
         <div className="page">
           <h1>View Report Page</h1>
           <div>
-          {JSON.stringify(reports)}
+
           </div>
+          <ViewMapContainer 
+            reports = {reports}/>
     
         </div>
       )}

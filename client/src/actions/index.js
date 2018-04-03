@@ -90,8 +90,7 @@ export const getUserReports = () => {
     return (dispatch) => {
         ApiService.get('/')
         .then(response => {
-            console.log("THIS IS A TEST")
-            console.log(response.data)
+            
             return dispatch({
                 type: ACTION_TYPES.getUserReports,
                 payload: response.data,

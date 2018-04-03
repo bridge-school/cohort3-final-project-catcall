@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper} from 'google-maps-react';
 import ReactDOM from 'react-dom'
 
-class Map extends Component {
+export default class ViewReportMap extends Component {
 
   componentDidUpdate() {
     this.loadMap(); // call loadMap function to load the google map
@@ -10,23 +9,15 @@ class Map extends Component {
 
   loadMap() {
     if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const { google } = this.props; // sets props equal to google
+      const {google, reports} = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
-      const locat = new google.maps.LatLng(
-        this.props.location.lat,
-        this.props.location.lng);
-
-      // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
-      // I don't believe Bootstrap + Styled-Components would apply here
-      // styles can be better generated through https://mapstyle.withgoogle.com/ and have "styles" property imported here to replace 
-      // the current one, once a design standard is decided on
       const mapConfig = Object.assign({}, {
-        center: { lat: locat.lat(), lng: locat.lng() },
-        zoom: 18,
+        center: {lat: 43.660194100000005, lng: -79.383184}, // sets center of google map to NYC.
+        zoom: 11, // sets zoom. Lower numbers are zoomed further out.
         mapTypeId: 'roadmap',
         styles: [
           { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -49,32 +40,48 @@ class Map extends Component {
           { featureType: 'water', elementType: 'labels.text.stroke', stylers: [{ color: '#17263c' }] }
         ]
       })
+      
+      const icons = {
+        expressionless: {
+          icon: 'https://emojipedia-us.s3.amazonaws.com/thumbs/60/apple/129/expressionless-face_1f611.png'
+        },
+        anguished: {
+          icon: 'https://emojipedia-us.s3.amazonaws.com/thumbs/60/apple/129/anguished-face_1f627.png'
+        },
+        angry: {
+          icon: 'https://emojipedia-us.s3.amazonaws.com/thumbs/60/apple/129/angry-face_1f620.png'
+        },
+        fearful: {
+          icon: 'https://emojipedia-us.s3.amazonaws.com/thumbs/60/apple/129/fearful-face_1f628.png'
+        },
+        scream: {
+          icon: 'https://emojipedia-us.s3.amazonaws.com/thumbs/60/apple/129/face-screaming-in-fear_1f631.png'
+        }
+      };
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
       
-
-        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-          position: {lat: locat.lat(), lng: locat.lng()}, 
-          map: this.map, // sets markers to appear on the map we just created on line 35
-          title: "Home", //TODO: update this title 
-          draggable: true 
-        });
-
-        marker.addListener('dragend', () => {
-            let position = marker.getPosition()
-            let latitude = position.lat()
-            let longitude = position.lng()
-            this.props.updatePinLocation(latitude, longitude);
-        });        
+    // ==================
+    // ADD MARKERS TO MAP
+    // ==================
+    reports.forEach( location => { // iterate through locations saved in state
+      const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+        position: {lat: location.latitude, lng: location.longitude}, // sets position of marker to specified location
+        map: this.map, // sets markers to appear on the map we just created on line 35
+        icon: icons[location.emotion].icon,
+        title: location.emotion // the title of the marker is set to the name of the location
+      });
+    })
     }
   }
 
+
+
   render() {
-    const style =
-      {
-        width: '90vw', //TODO: update these
-        height: '75vh'
-      }
+    const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
+      width: '90vw', // 90vw basically means take up 90% of the width screen. px also works.
+      height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
+    }
 
     return ( // in our return function you must return a div with ref='map' and style.
       <div ref="map" style={style}>
@@ -83,7 +90,3 @@ class Map extends Component {
     )
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyA06nlgcoEtxl0TMQeh0Sm4DQjZh6gV_mA')
-})(Map)
