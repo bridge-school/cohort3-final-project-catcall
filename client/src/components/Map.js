@@ -57,7 +57,6 @@ constructor(props) {
         this.map = new maps.Map(node, mapConfig);  
         maps.event.addListener(this.map, 'idle', () => {
           this.setState({ mapLoaded: true });
-          console.log(this.state.mapLoaded);
         });
         this.marker = new maps.Marker({ 
           position: {lat: locat.lat(), lng: locat.lng()}, 
