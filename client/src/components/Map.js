@@ -6,12 +6,11 @@ class Map extends Component {
 constructor(props) {
   super(props);
   this.state = {
-    mapLoaded: false, 
-    marker: undefined
+    mapLoaded: false
   };
 }
   componentDidUpdate() {
-    this.loadMap(); // call loadMap function to load the google map
+    this.loadMap(); 
   }
 
   loadMap() {
@@ -54,7 +53,7 @@ constructor(props) {
         ]
       })
 
-      if (!this.state.mapLoaded){
+      if (!this.state.mapLoaded){ // this prevents the map from reloading every time something updates
         this.map = new maps.Map(node, mapConfig);  
         maps.event.addListener(this.map, 'idle', () => {
           this.setState({ mapLoaded: true });
@@ -72,18 +71,18 @@ constructor(props) {
         let latitude = position.lat()
         let longitude = position.lng()
         this.props.updatePinLocation(latitude, longitude);
-    });
+      });
     }
   }
 
   render() {
     const style =
       {
-        width: '90vw', //TODO: update these
-        height: '75vh'
+        width: '100vw', 
+        height: '70vh'
       }
 
-    return ( // in our return function you must return a div with ref='map' and style.
+    return ( 
       <div ref="map" style={style}>
         loading map...
       </div>
