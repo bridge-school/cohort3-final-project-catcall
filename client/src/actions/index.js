@@ -1,6 +1,8 @@
+import ApiService from '../shared/services/api-service';
+
 export const ACTION_TYPES = {
-    userLocation: 'USER_LOCATION', // explicitly for the text input
-    getLocationStart: 'GET_LOCATION_START', // detecting browser location
+    userLocation: 'USER_LOCATION',
+    getLocationStart: 'GET_LOCATION_START',
     getLocationSuccess: 'GET_LOCATION_SUCCESS',
     getLocationError: 'GET_LOCATION_ERROR',
     updatePinLocation: 'USER_LOCATION',
@@ -32,39 +34,52 @@ export const fetchLocation = (location) => {
     }
 }
 
+// Action for the pin location
 export const updatePinLocation = (latitude, longitude) => {
     return {
         type: ACTION_TYPES.updatePinLocation,
-        payload: { 
-                latitude,
-                longitude
+        payload: {
+            latitude,
+            longitude
         }
     }
 }
 
+// Action for the user rating
 export const updateRating = (ratingValue) => {
-  return {
-    type: ACTION_TYPES.updateRating,
-    payload: ratingValue
-  }
+    return {
+        type: ACTION_TYPES.updateRating,
+        payload: ratingValue
+    }
 }
 
-export const handleSubmitReport = (e) => {
-  e.preventDefault();
-  console.log('start sending report...');
-  return (dispatch, getState) => {
-    const reportState = getState().rootReducer;
-    const locationLat = reportState.locationReducer.lat;
-    const locationLon = reportState.locationReducer.lng;
-    const rating = reportState.ratingReducer.selectedRating;
-    const report = {
-      loc: {
-        lat: locationLat,
-        lon: locationLon
-      },
-      rating
+// Action Thunk for submitting report
+export const handleSubmitReport = () => {
+    return (dispatch, getState) => {
+        const reportState = getState().rootReducer;
+        const locationLat = reportState.locationReducer.loc.lat;
+        const locationLon = reportState.locationReducer.loc.lng;
+        const rating = reportState.ratingReducer.selectedRating;
+        const report = {
+            loc: {
+                lat: locationLat,
+                lon: locationLon
+            },
+            rating
+        }
+        ApiService.post('/report', {
+            emotion: rating,
+            latitude: locationLat,
+            longitude: locationLon,
+        })
+            .then(response => {
+                dispatch({
+                    type: ACTION_TYPES.handleSubmitReport,
+                    payload: report,
+                });
+            })
+            .catch(error => {
+                console.error(error)
+            })
     }
-    console.log(`report object is ${JSON.stringify(report)}`);
-    dispatch({ type: ACTION_TYPES.handleSubmitReport });
-  }
 }
