@@ -3,23 +3,27 @@ import {GoogleApiWrapper} from 'google-maps-react';
 import ReactDOM from 'react-dom'
 
 class Map extends Component {
-
+constructor(props) {
+  super(props);
+  this.state = {
+    mapLoaded: false
+  };
+}
   componentDidUpdate() {
-    this.loadMap(); // call loadMap function to load the google map
+    this.loadMap(); 
   }
 
   loadMap() {
-    if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const { google } = this.props; // sets props equal to google
-      const maps = google.maps; // sets maps to google maps props
-
-      const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
-      const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
-
+    if (this.props && this.props.google) { 
+      const { google } = this.props; 
+      const maps = google.maps;
+      const mapRef = this.refs.map; 
+      const node = ReactDOM.findDOMNode(mapRef); 
       const locat = new google.maps.LatLng(
         this.props.location.lat,
-        this.props.location.lng);
-
+        this.props.location.lng
+      );
+      let marker;
       // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
       // I don't believe Bootstrap + Styled-Components would apply here
       // styles can be better generated through https://mapstyle.withgoogle.com/ and have "styles" property imported here to replace 
@@ -50,33 +54,37 @@ class Map extends Component {
         ]
       })
 
-      this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
-      
-
-        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+      if (!this.state.mapLoaded){ // this prevents the map from reloading every time something updates
+        this.map = new maps.Map(node, mapConfig);  
+        maps.event.addListener(this.map, 'idle', () => {
+          this.setState({ mapLoaded: true });
+        });
+        marker = new maps.Marker({ 
           position: {lat: locat.lat(), lng: locat.lng()}, 
-          map: this.map, // sets markers to appear on the map we just created on line 35
-          title: "Home", //TODO: update this title 
+          map: this.map, 
           draggable: true 
         });
-
+      }
+      
+      if (marker){
         marker.addListener('dragend', () => {
-            let position = marker.getPosition()
-            let latitude = position.lat()
-            let longitude = position.lng()
-            this.props.updatePinLocation(latitude, longitude);
-        });        
+          let position = marker.getPosition()
+          let latitude = position.lat()
+          let longitude = position.lng()
+          this.props.updatePinLocation(latitude, longitude);
+        });
+      }
     }
   }
 
   render() {
     const style =
       {
-        width: '90vw', //TODO: update these
-        height: '75vh'
+        width: '100vw', 
+        height: '70vh'
       }
 
-    return ( // in our return function you must return a div with ref='map' and style.
+    return ( 
       <div ref="map" style={style}>
         loading map...
       </div>
