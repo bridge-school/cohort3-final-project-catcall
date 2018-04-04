@@ -1,17 +1,61 @@
 import React, { Component } from 'react';
-import {GoogleApiWrapper} from 'google-maps-react';
 import ReactDOM from 'react-dom'
 
 class Map extends Component {
+  
+  getGoogleMaps() {
+    const google = window.google;
+
+    if(google) {
+      return new Promise((resolve) => resolve(google))
+    }
+    debugger;
+    // If we haven't already defined the promise, define it
+    if (!this.googleMapsPromise) {
+      this.googleMapsPromise = new Promise((resolve) => {
+        // Add a global handler for when the API finishes loading
+        window.resolveGoogleMapsPromise = () => {
+          // Resolve the promise
+          resolve(google);
+
+          // Tidy up
+          delete window.resolveGoogleMapsPromise;
+        };
+
+        // Load the Google Maps API
+        const script = document.createElement("script");
+        const API = 'AIzaSyA06nlgcoEtxl0TMQeh0Sm4DQjZh6gV_mA';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    }
+
+    // Return a promise for the Google Maps API
+    return this.googleMapsPromise;
+  }
+
+  componentWillMount() {
+    // Start Google Maps API loading since we know we'll soon need it
+    this.getGoogleMaps();
+  }
+
+  componentDidMount() {
+    // Once the Google Maps API has finished loading, initialize the map
+    this.getGoogleMaps().then(() => {
+      this.loadMap();
+    });
+  }
 
   componentDidUpdate() {
     this.loadMap(); // call loadMap function to load the google map
   }
 
   loadMap() {
-    if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const { google } = this.props; // sets props equal to google
-      const maps = google.maps; // sets maps to google maps props
+    if (this.props && window.google) { // checks to make sure that props have been passed
+      // const { google } = this.props; // sets props equal to google
+      const google = window.google;
+      const maps = window.google.maps; // sets maps to google maps props
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
@@ -81,8 +125,6 @@ class Map extends Component {
       </div>
     )
   }
-}
+};
 
-export default GoogleApiWrapper({
-  apiKey: ('AIzaSyA06nlgcoEtxl0TMQeh0Sm4DQjZh6gV_mA')
-})(Map)
+export default Map;
