@@ -10,6 +10,7 @@ import StyledRow from '../components/styled/StyledRow';
 import StyledCol from '../components/styled/StyledCol';
 import Input from '../components/Input';
 import Button from '../components/Button';
+import NavBar from '../components/NavBar';
 
 class MainPage extends Component {
 
@@ -34,6 +35,7 @@ class MainPage extends Component {
 
     return (
       <div className="App">
+        <NavBar/>
         <StyledGrid>
           <StyledRow>
             <StyledCol xs={12} lg={12}>
