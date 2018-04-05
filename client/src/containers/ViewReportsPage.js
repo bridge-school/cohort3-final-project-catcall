@@ -10,6 +10,14 @@ class ViewReportsPage extends Component {
   componentDidMount() {
     this.props.getUserReports();
   }
+  componentWillReceiveProps(nextProps) {
+    if (!nextProps) {
+      return;
+    }
+    if (this.props.reports.length !== nextProps.reports.length) {
+      this.props.getUserReports();
+    }
+  }
   render() {
     const { reports } = this.props;
     
@@ -19,9 +27,9 @@ class ViewReportsPage extends Component {
           <ViewMapContainer 
             reports = {reports}/>
         </div>
-      )}
+    )
+  }
 }
-
 
 const mapStateToProps = (state) => ({
   reports: state.rootReducer.locationReducer.reports
