@@ -1,7 +1,7 @@
 import React from 'react';
 import Image from './Image';
 import StyledNavBar from './styled/StyledNavBar';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
 const NavBar = () => {
     return (
