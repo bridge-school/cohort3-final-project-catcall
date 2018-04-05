@@ -49,10 +49,10 @@ class MainPage extends Component {
             <StyledCol xs={12} sm={12} md={6} lg={6}>
               {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
           Links or via onClick handlers */}
-              <Button bsStyle="primary"><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
+              <Link to="/report" style={{ color: 'white' }}><Button bsStyle="primary">Report Incident</Button ></Link>
             </StyledCol>
             <StyledCol xs={12} sm={12} md={6} lg={6}>
-              <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
+              <Link to="/data" style={{ color: 'white' }}><Button bsStyle="primary">View Reports</Button></Link>
             </StyledCol>
           </StyledRow>
         </StyledGrid>
