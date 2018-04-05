@@ -6,12 +6,6 @@ import { getUserInput, getUserLocation } from '../actions/index';
 
 
 class SimpleForm extends Component {
-    
- // constructor(props) {
- //   super(props)
- //   this.state = { address: 'Toronto, ON' }
- //   this.onChange = (address) => this.setState({ address })
- // }
 
   handleChange = (e) => {
     this.props.getUserInput(e);
@@ -33,10 +27,8 @@ class SimpleForm extends Component {
     }
 
     return (
-      <form onSubmit={this.handleFormSubmit}>
+      // <form onSubmit={this.handleFormSubmit}>
         <PlacesAutocomplete inputProps={inputProps} />
-        <button type="submit">Submit</button>
-      </form>
     )
   }
 }

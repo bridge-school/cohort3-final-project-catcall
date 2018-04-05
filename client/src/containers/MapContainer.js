@@ -30,12 +30,11 @@ const mapStateToProps = (state) => ({
   loc: state.rootReducer.locationReducer.loc
 })
 
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({ 
-      getUserLocation: getUserLocation,
-      updatePinLocation: updatePinLocation,
-    }, dispatch)
-}
+const mapDispatchToProps = dispatch => 
+  bindActionCreators({ 
+    getUserLocation: getUserLocation,
+    updatePinLocation: updatePinLocation,
+  }, dispatch)
 
 export default connect(mapStateToProps, mapDispatchToProps)(MapContainer);
 
