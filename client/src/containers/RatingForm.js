@@ -2,16 +2,20 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { handleSubmitReport } from '../actions/index';
 import EmojiButtonContainer from './EmojiButtonContainer';
+import Button from '../components/Button';
 
-const RatingForm = ({ handleSubmitReport, push }) => {
-  const doSubmission = (e) => {
-    e.preventDefault();
+const RatingForm = ({ handleSubmitReport, push, state }) => {
+  
+  const doSubmission = e => {
+    // e.preventDefault();
     handleSubmitReport();
     push('/data');
   }
 
+  const validForm = state.loc.lat && state.loc.lng && state.selectedRating
+
   return (
-    <form onSubmit={(e) => doSubmission(e)}>
+    <div>
       <h2>Please state how you felt when the incident happened</h2>
       <div className="emoji-buttons">
         <EmojiButtonContainer reaction="expressionless" />
@@ -20,13 +24,20 @@ const RatingForm = ({ handleSubmitReport, push }) => {
         <EmojiButtonContainer reaction="fearful" />
         <EmojiButtonContainer reaction="scream" />
       </div>
-      <input type="submit" value="Submit Incident" />
-    </form>
+      <Button bsStyle="primary" onClick={doSubmission} disabled={!validForm}>{ "Submit" }</Button>
+    </div>
   )
 }
+
+const mapStateToProps = state => ({
+  state: {
+    loc: state.rootReducer.locationReducer.loc,
+    selectedRating: state.rootReducer.ratingReducer.selectedRating
+  }
+})
 
 const mapDispatchToProps = {
   handleSubmitReport
 };
 
-export default connect(null, mapDispatchToProps)(RatingForm);
+export default connect(mapStateToProps, mapDispatchToProps)(RatingForm);
