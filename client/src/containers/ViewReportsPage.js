@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import { getUserReports } from '../actions/index';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -13,29 +13,30 @@ class ViewReportsPage extends Component {
   }
   render() {
     const { reports } = this.props;
-    
-    return(
-       
-        <div className="page">
-          <h1>View Report Page</h1>
-          <div>
 
-          </div>
-          <ViewMapContainer 
-            reports = {reports}/>
-    
+    return (
+
+      <div className="page">
+        <h1>View Report Page</h1>
+        <div>
+
         </div>
-      )}
+        <ViewMapContainer
+          reports={reports} />
+
+      </div>
+    )
+  }
 }
 
 
 const mapStateToProps = (state) => ({
   reports: state.rootReducer.locationReducer.reports
 })
-  ViewReportsPage.propTypes = {
-    reports: PropTypes.array.isRequired,
-    getUserReports: PropTypes.func.isRequired,
-  }
+ViewReportsPage.propTypes = {
+  reports: PropTypes.array.isRequired,
+  getUserReports: PropTypes.func.isRequired,
+}
 
 const mapDispatchToProps = {
   getUserReports,
