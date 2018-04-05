@@ -17,7 +17,7 @@ export default class ViewReportMap extends Component {
 
       const mapConfig = Object.assign({}, {
         center: {lat: 43.660194100000005, lng: -79.383184}, // sets center of google map to NYC.
-        zoom: 11, // sets zoom. Lower numbers are zoomed further out.
+        zoom: 13, // sets zoom. Lower numbers are zoomed further out.
         mapTypeId: 'roadmap',
         styles: [
           { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -79,7 +79,7 @@ export default class ViewReportMap extends Component {
 
   render() {
     const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
-      width: '90vw', // 90vw basically means take up 90% of the width screen. px also works.
+      width: '100vw', // 90vw basically means take up 90% of the width screen. px also works.
       height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
     }
 
