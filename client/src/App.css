@@ -27,3 +27,16 @@
   to { transform: rotate(360deg); }
 }
 
+.emoji-button {
+  border: #777777 1px solid;
+  padding: 1.4rem;
+  cursor: pointer;
+}
+
+.emoji-button input[type=radio] {
+  display: none;
+}
+
+.emoji-button img {
+  width: 30px;
+}
