@@ -5,9 +5,7 @@ import PropTypes from 'prop-types';
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
-import StyledGrid from '../components/styled/StyledGrid';
-import StyledRow from '../components/styled/StyledRow';
-import StyledCol from '../components/styled/StyledCol';
+import { StyledGrid, StyledRow, StyledCol } from '../components/styled/StyledGridElements';
 import Input from '../components/Input';
 import Button from '../components/Button';
 import NavBar from '../components/NavBar';
