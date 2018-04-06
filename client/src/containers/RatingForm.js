@@ -15,7 +15,7 @@ const RatingForm = ({ handleSubmitReport, push, state }) => {
   const validForm = state.loc.lat && state.loc.lng && state.selectedRating
 
   return (
-    <form>
+    <div>
       <h2>Please state how you felt when the incident happened</h2>
       <div className="emoji-buttons">
         <EmojiButtonContainer reaction="expressionless" />
@@ -25,7 +25,7 @@ const RatingForm = ({ handleSubmitReport, push, state }) => {
         <EmojiButtonContainer reaction="scream" />
       </div>
       <Button bsStyle="primary" onClick={doSubmission} disabled={!validForm}>Submit</Button>
-    </form>
+    </div>
   )
 }
 
