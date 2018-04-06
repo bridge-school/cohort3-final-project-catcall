@@ -2,9 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Image from './Image';
 import StyledNavBar from './styled/StyledNavBar';
-import { Navbar, Nav, NavItem } from 'react-bootstrap';
+import { Navbar } from 'react-bootstrap';
 
-const NavBar = ({ children }) => {
+const NavBar = () => {
     return (
         <StyledNavBar>
             <Navbar.Header>
@@ -14,16 +14,14 @@ const NavBar = ({ children }) => {
                     </a>
                     <a href="/">Catcall.io</a>
                 </Navbar.Brand>
+                <Navbar.Link href="/" pullRight>Home</Navbar.Link>
             </Navbar.Header>
-            <Nav pullRight>
-                <NavItem eventKey={1} href="/">Home</NavItem>
-            </Nav>
         </StyledNavBar>
     );
 };
 
 NavBar.propTypes = {
-    children: PropTypes.string.isRequired,
+    children: PropTypes.string,
 }
 
 export default NavBar;
