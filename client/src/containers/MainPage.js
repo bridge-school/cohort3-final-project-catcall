@@ -32,7 +32,7 @@ class MainPage extends Component {
     const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     return (
-      <div className="App">
+      <div>
         <NavBar/>
         <StyledGrid>
           <StyledRow>
