@@ -23,8 +23,7 @@ const mapDispatchToProps = {
 };
 
 EmojiButton.propTypes = {
-  selectedRating: PropTypes.string.isRequired,
-  updateRating: PropTypes.string.isRequired,
+  updateRating: PropTypes.function.isRequired,
   reaction: PropTypes.string.isRequired
 }
 
