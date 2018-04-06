@@ -30,7 +30,6 @@ class ViewReportsPage extends Component {
   }
 }
 
-
 const mapStateToProps = (state) => ({
   reports: state.rootReducer.locationReducer.reports
 })
