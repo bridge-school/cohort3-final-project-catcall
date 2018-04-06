@@ -5,9 +5,11 @@ class Map extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { map: null };
+    this.state = { 
+      map: null,
+      pin: null 
+     };
   }
-
 
   getGoogleMaps() {
     const google = window.google;
@@ -71,7 +73,6 @@ class Map extends Component {
         this.props.location.lat,
         this.props.location.lng
       );
-      let marker;
       // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
       // I don't believe Bootstrap + Styled-Components would apply here
       // styles can be better generated through https://mapstyle.withgoogle.com/ and have "styles" property imported here to replace 
@@ -102,44 +103,32 @@ class Map extends Component {
         ]
       })
 
-      // if (!this.state.mapLoaded){ // this prevents the map from reloading every time something updates
       const mapInstance = new maps.Map(node, mapConfig);
 
       this.setState({ map: mapInstance}); 
 
-        // maps.event.addListener(this.map, 'idle', () => {
-        //   // this.setState({ mapLoaded: true });
-        // });
-
-        marker = new maps.Marker({ 
+      const marker = new maps.Marker({ 
           position: {lat: locat.lat(), lng: locat.lng()}, 
           map: mapInstance, 
           draggable: true 
         });
-      // }
-      
-      // if (marker){
+
         marker.addListener('dragend', () => {
           let position = marker.getPosition()
           let latitude = position.lat()
           let longitude = position.lng()
           this.props.updatePinLocation(latitude, longitude); // <-- our action
-          // this.moveMap({ lat: latitude, lng: longitude })// <-- now pan the map
           //geocodePosition(marker.getPosition()); HERE
         });
-      // }
+
+      this.setState({ pin: marker });
     }
   }
 
   moveMap({ lat = 0, lng = 0 }) {
+    console.log(this.state.map)
+    this.state.map.panTo({ lat, lng });
     
-    const latLongObj = {
-      lat,
-      lng,
-    };
-
-    this.state.map.panTo(latLongObj);
-
   }
 
   render() {

@@ -22,19 +22,6 @@ class MainPage extends Component {
     }
   }
 
-  // handleFormSubmit = (e) => {
-  //   e.preventDefault()
-    
-  //   geocodeByAddress(this.props.userInput)
-  //     .then(results => getLatLng(results[0]))
-  //     .then(latLng => this.props.getUserLocation(latLng))
-  //     .catch(error => console.error('Error', error))
-  // }
-
-  //handleChange = (e) => {
-  //  this.props.getUserLocation(e.target.value);
-  //}
-
   startNewReport = () => { }
 
   viewReports = () => { }
@@ -43,10 +30,7 @@ class MainPage extends Component {
     e.preventDefault();
     geocodeByAddress(this.props.userLocation)
       .then(results => getLatLng(results[0]))
-      .then(latLng => {
-        console.log(latLng, 'hiii')
-        this.props.getUserLocation(latLng);
-      })
+      .then(latLng => this.props.getUserLocation({ latitude: latLng.lat,  longitude: latLng.lng }))
       .catch(error => console.error('Error', error));
   }
 

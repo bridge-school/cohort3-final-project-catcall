@@ -15,7 +15,7 @@ class SimpleForm extends Component {
     e.preventDefault()
     geocodeByAddress(this.props.userInput)
       .then(results => getLatLng(results[0]))
-      .then(latLng => this.props.getUserLocation(latLng))
+      .then(latLng => this.props.getUserLocation({ latitude: latLng.lat,  longitude: latLng.lng }))
       .catch(error => console.error('Error', error))
   }
 
@@ -26,8 +26,6 @@ class SimpleForm extends Component {
     }
 
     return (
-      // <form onSubmit={this.handleFormSubmit}>
-      // onSelect is not an DOM event it is a custom function in PlacesAutocomplete by the library 
         <PlacesAutocomplete inputProps={inputProps} />
     )
   }
