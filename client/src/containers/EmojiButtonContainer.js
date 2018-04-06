@@ -4,12 +4,11 @@ import { updateRating } from '../actions/index';
 
 const EmojiButton = ({ selectedRating, updateRating, reaction }) => {
   const isChecked = selectedRating === reaction;
-  const emojiReaction = `:${reaction}:`;
   return (
-    <label>
+      <label className="emoji-button">
+      <img src={`/imgs/${reaction}.png`} alt={reaction} role="button" />
       <input type="radio" value={reaction} checked={isChecked} onChange={(e) => updateRating(e.target.value)}/>
-      { emojiReaction }
-    </label>
+      </label>
   );
 };
 

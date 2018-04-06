@@ -18,7 +18,7 @@ const RatingForm = ({ handleSubmitReport, push }) => {
         <EmojiButtonContainer reaction="anguished" />
         <EmojiButtonContainer reaction="angry" />
         <EmojiButtonContainer reaction="fearful" />
-        <EmojiButtonContainer reaction="scream" />
+        <EmojiButtonContainer reaction="screaming" />
       </div>
       <input type="submit" value="Submit Incident" />
     </form>
