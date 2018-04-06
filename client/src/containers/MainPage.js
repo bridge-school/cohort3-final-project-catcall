@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-// import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
+import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
 import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
@@ -39,6 +39,17 @@ class MainPage extends Component {
 
   viewReports = () => { }
 
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    geocodeByAddress(this.props.userLocation)
+      .then(results => getLatLng(results[0]))
+      .then(latLng => {
+        console.log(latLng, 'hiii')
+        this.props.getUserLocation(latLng);
+      })
+      .catch(error => console.error('Error', error));
+  }
+
   render() {
     //const { loc } = this.props;
     //const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
@@ -50,14 +61,14 @@ class MainPage extends Component {
           <StyledRow>
             <StyledCol xs={12} lg={12}>
             {/* <Input inputValue={location} handleChange={this.handleChange} /> */}
-            <SimpleForm ref={instance => { this.child = instance; }}/>
+            <SimpleForm />
             </StyledCol>
           </StyledRow>
           <StyledRow>
             <StyledCol xs={12} sm={12} md={6} lg={6}>
               {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
           Links or via onClick handlers */}
-              <Button bsStyle="primary" onClick={(e) => { this.child.handleFormSubmit }} ><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
+              <Button bsStyle="primary" onClick={this.handleFormSubmit} ><Link to="/report" style={{ color: 'white' }}>Report Incident</Link></Button >
             </StyledCol>
             <StyledCol xs={12} sm={12} md={6} lg={6}>
               <Button bsStyle="primary"><Link to="/data" style={{ color: 'white' }}>View Reports</Link></Button>
@@ -71,7 +82,7 @@ class MainPage extends Component {
 }
 
 const mapStateToProps = state => ({
-  //userLocation: state.rootReducer.locationReducer.userInput,
+  userLocation: state.rootReducer.locationReducer.userInput,
   loc: state.rootReducer.locationReducer.loc
 })
 

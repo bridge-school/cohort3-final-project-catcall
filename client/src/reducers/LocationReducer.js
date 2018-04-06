@@ -14,7 +14,10 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
         case ACTION_TYPES.userLocation: // input updating location
             return {
                 ...state,
-                loc: payload
+                loc: {
+                    lat: payload.latitude,
+                    lng: payload.longitude,
+                }
             }
         case ACTION_TYPES.getLocationSuccess: // browser location is updating
             return {
@@ -25,6 +28,7 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
                 }
             }
         case ACTION_TYPES.updatePinLocation:
+            console.log('got to Reducer with:', payload);
             return {
                 ...state,
                 loc: {

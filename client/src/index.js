@@ -14,7 +14,7 @@ import { createLogger } from 'redux-logger';
 
 const history = createHistory();
 const middleware = routerMiddleware(history);
-const logger = createLogger();
+const logger = createLogger({ collapsed: true });
 
 const store = createStore(
   combineReducers({

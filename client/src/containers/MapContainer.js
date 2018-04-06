@@ -16,7 +16,7 @@ class MapContainer extends Component {
           <h3>Longitude: {this.props.loc.lng}</h3>
         </div>
         <Map
-          google={this.props.google}
+          //google={this.props.google}
           getUserLocation={getUserLocation}
           location={this.props.loc}
           updatePinLocation={updatePinLocation}

@@ -2,12 +2,12 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 
 class Map extends Component {
+
   constructor(props) {
     super(props);
-    this.state = {
-      mapLoaded: false
-    };
+    this.state = { map: null };
   }
+
 
   getGoogleMaps() {
     const google = window.google;
@@ -16,7 +16,6 @@ class Map extends Component {
       return new Promise((resolve) => resolve(google))
     }
 
-    debugger;
     // If we haven't already defined the promise, define it
     if (!this.googleMapsPromise) {
       this.googleMapsPromise = new Promise((resolve) => {
@@ -55,20 +54,19 @@ class Map extends Component {
   }
 
   componentDidUpdate() {
-    this.getGoogleMaps().then(() => {
-      this.loadMap();
-    });
+    this.moveMap(this.props.location);
   }
 
   loadMap() {
     if (this.props && window.google) { // checks to make sure that props have been passed
       // const { google } = this.props; // sets props equal to google
+
+      console.log('the "loadMap()" was fired');
       const google = window.google;
       const maps = window.google.maps; // sets maps to google maps props
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
-
       const locat = new google.maps.LatLng(
         this.props.location.lat,
         this.props.location.lng
@@ -104,27 +102,44 @@ class Map extends Component {
         ]
       })
 
-      if (!this.state.mapLoaded){ // this prevents the map from reloading every time something updates
-        this.map = new maps.Map(node, mapConfig);  
-        maps.event.addListener(this.map, 'idle', () => {
-          this.setState({ mapLoaded: true });
-        });
+      // if (!this.state.mapLoaded){ // this prevents the map from reloading every time something updates
+      const mapInstance = new maps.Map(node, mapConfig);
+
+      this.setState({ map: mapInstance}); 
+
+        // maps.event.addListener(this.map, 'idle', () => {
+        //   // this.setState({ mapLoaded: true });
+        // });
+
         marker = new maps.Marker({ 
           position: {lat: locat.lat(), lng: locat.lng()}, 
-          map: this.map, 
+          map: mapInstance, 
           draggable: true 
         });
-      }
+      // }
       
-      if (marker){
+      // if (marker){
         marker.addListener('dragend', () => {
           let position = marker.getPosition()
           let latitude = position.lat()
           let longitude = position.lng()
-          this.props.updatePinLocation(latitude, longitude);
+          this.props.updatePinLocation(latitude, longitude); // <-- our action
+          // this.moveMap({ lat: latitude, lng: longitude })// <-- now pan the map
+          //geocodePosition(marker.getPosition()); HERE
         });
-      }
+      // }
     }
+  }
+
+  moveMap({ lat = 0, lng = 0 }) {
+    
+    const latLongObj = {
+      lat,
+      lng,
+    };
+
+    this.state.map.panTo(latLongObj);
+
   }
 
   render() {
