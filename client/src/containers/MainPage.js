@@ -37,7 +37,7 @@ class MainPage extends Component {
     const validForm = (loc.lat && loc.lng) || this.props.userInput
 
     return (
-      <div className="App">
+      <div>
         <NavBar />
         <StyledGrid>
           <StyledRow>
@@ -54,7 +54,6 @@ class MainPage extends Component {
             </StyledCol>
           </StyledRow>
         </StyledGrid>
-
       </div >
     );
   }
