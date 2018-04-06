@@ -10,7 +10,7 @@ const NavBar = () => {
             <Navbar.Header>
                 <Navbar.Brand>
                      <a href="/">
-                        <Image/>
+                        <Image src='/imgs/logo.png' alt='logo'/>
                     </a>
                     <a href="/">Catcall.io</a>
                 </Navbar.Brand>
