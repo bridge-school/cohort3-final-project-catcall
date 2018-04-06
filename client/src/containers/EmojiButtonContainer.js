@@ -1,14 +1,15 @@
 import React from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+
 import { updateRating } from '../actions/index';
 
 const EmojiButton = ({ selectedRating, updateRating, reaction }) => {
   const isChecked = selectedRating === reaction;
-  const emojiReaction = `:${reaction}:`;
   return (
-    <label>
+    <label className="emoji-button">
+      <img src={`/imgs/${reaction}.png`} alt={reaction} role="button" />
       <input type="radio" value={reaction} checked={isChecked} onChange={(e) => updateRating(e.target.value)}/>
-      { emojiReaction }
     </label>
   );
 };
@@ -20,6 +21,12 @@ const mapStateToProps = storeState => ({
 const mapDispatchToProps = {
   updateRating
 };
+
+EmojiButton.propTypes = {
+  selectedRating: PropTypes.string.isRequired,
+  updateRating: PropTypes.string.isRequired,
+  reaction: PropTypes.string.isRequired
+}
 
 const EmojiButtonContainer = connect(mapStateToProps, mapDispatchToProps)(EmojiButton);
 

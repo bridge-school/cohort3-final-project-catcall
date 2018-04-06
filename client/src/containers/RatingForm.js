@@ -22,7 +22,7 @@ const RatingForm = ({ handleSubmitReport, push, state }) => {
         <EmojiButtonContainer reaction="anguished" />
         <EmojiButtonContainer reaction="angry" />
         <EmojiButtonContainer reaction="fearful" />
-        <EmojiButtonContainer reaction="scream" />
+        <EmojiButtonContainer reaction="screaming" />
       </div>
       <Button bsStyle="primary" onClick={doSubmission} disabled={!validForm}>Submit</Button>
     </div>
