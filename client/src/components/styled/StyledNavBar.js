@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Navbar } from 'react-bootstrap';
 
 const StyledNavBar = styled(Navbar) `
-
+    margin-bottom: 0px;
 
     .navbar-link {
         float: right !important;
@@ -26,16 +26,6 @@ const StyledNavBar = styled(Navbar) `
             color: #000000;
             text-decoration: none !important
         }
-    }
-    nav .navbar {
-        .navbar-default {
-            line-height: 0px !important;
-            margin-bottom: 0px !important;
-        }
-        line-height: 0px !important;
-        margin-bottom: 0px !important;
-        position: absolute;
-
     }
 `
 
