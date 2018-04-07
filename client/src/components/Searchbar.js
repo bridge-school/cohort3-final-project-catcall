@@ -26,7 +26,7 @@ class SimpleForm extends Component {
     }
 
     return (
-        <PlacesAutocomplete inputProps={inputProps} />
+        <PlacesAutocomplete inputProps={inputProps} style={{zIndex:100}}/>
     )
   }
 }

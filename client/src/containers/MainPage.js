@@ -27,7 +27,7 @@ class MainPage extends Component {
   viewReports = () => { }
 
   handleFormSubmit = (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     geocodeByAddress(this.props.userLocation)
       .then(results => getLatLng(results[0]))
       .then(latLng => this.props.getUserLocation({ latitude: latLng.lat,  longitude: latLng.lng }))
@@ -45,7 +45,7 @@ class MainPage extends Component {
           <StyledRow>
             <StyledCol xs={12} lg={12}>
             {/* <Input inputValue={location} handleChange={this.handleChange} /> */}
-            <SimpleForm />
+            <SimpleForm style={{zIndex:100}}/>
             </StyledCol>
           </StyledRow>
           <StyledRow>
