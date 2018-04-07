@@ -33,10 +33,19 @@
   cursor: pointer;
 }
 
-.emoji-button input[type=radio] {
+.emoji-button__radio {
   display: none;
 }
 
-.emoji-button img {
+.emoji-button__label img {
   width: 30px;
+}
+
+.emoji-button__label {
+  padding: 2rem;
+  border: #333 1px solid;
+}
+
+.emoji-button__radio:checked + label {
+  background-color: #95dbfe;
 }
