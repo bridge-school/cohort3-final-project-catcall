@@ -9,14 +9,14 @@ export default class ViewReportMap extends Component {
 
   loadMap() {
     if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const {google, reports} = this.props; // sets props equal to google
+      const { google, reports } = this.props; // sets props equal to google
       const maps = google.maps; // sets maps to google maps props
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
       const mapConfig = Object.assign({}, {
-        center: {lat: 43.660194100000005, lng: -79.383184}, // sets center of google map to NYC.
+        center: { lat: 43.660194100000005, lng: -79.383184 }, // sets center of google map to NYC.
         zoom: 13, // sets zoom. Lower numbers are zoomed further out.
         mapTypeId: 'roadmap',
         styles: [
@@ -40,7 +40,7 @@ export default class ViewReportMap extends Component {
           { featureType: 'water', elementType: 'labels.text.stroke', stylers: [{ color: '#17263c' }] }
         ]
       })
-      
+
       const icons = {
         expressionless: {
           icon: '/imgs/angry.png'
@@ -56,22 +56,25 @@ export default class ViewReportMap extends Component {
         },
         scream: {
           icon: '/imgs/scream.png'
+        },
+        screaming: {
+          icon: '/imgs/scream.png'
         }
       };
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
-      
-    // ==================
-    // ADD MARKERS TO MAP
-    // ==================
-    reports.forEach( location => { // iterate through locations saved in state
-      const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-        position: {lat: location.latitude, lng: location.longitude}, // sets position of marker to specified location
-        map: this.map, // sets markers to appear on the map we just created on line 35
-        icon: icons[location.emotion].icon,
-        title: location.emotion // the title of the marker is set to the name of the location
-      });
-    })
+
+      // ==================
+      // ADD MARKERS TO MAP
+      // ==================
+      reports.forEach(location => { // iterate through locations saved in state
+        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
+          position: { lat: location.latitude, lng: location.longitude }, // sets position of marker to specified location
+          map: this.map, // sets markers to appear on the map we just created on line 35
+          icon: icons[location.emotion].icon,
+          title: location.emotion // the title of the marker is set to the name of the location
+        });
+      })
     }
   }
 

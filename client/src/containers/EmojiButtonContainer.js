@@ -9,9 +9,9 @@ const EmojiButton = ({ selectedRating, updateRating, reaction }) => {
   const isChecked = selectedRating === reaction;
   return (
     <label>
-    <Image src={`/imgs/${reaction}.png`} alt={reaction} role="button" />
-    <Input display="none" type="radio" inputValue={reaction} checked={isChecked} handleChange={(e) => updateRating(e.target.value)}/>
-  </label>
+      <Image src={`/imgs/${reaction}.png`} alt={reaction} role="button" highlight={isChecked} circle={true} />
+      <Input display="none" type="radio" inputValue={reaction} checked={isChecked} handleChange={(e) => updateRating(e.target.value)} />
+    </label>
   );
 };
 

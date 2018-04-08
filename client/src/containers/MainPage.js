@@ -40,6 +40,7 @@ class MainPage extends Component {
               <Input
                 inputValue={location}
                 handleChange={this.handleChange}
+                placeholder="Enter incident location"
               />
             </StyledCol>
           </StyledRow>
