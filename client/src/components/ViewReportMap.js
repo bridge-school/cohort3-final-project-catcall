@@ -57,9 +57,6 @@ export default class ViewReportMap extends Component {
         scream: {
           icon: '/imgs/scream.png'
         },
-        screaming: {
-          icon: '/imgs/scream.png'
-        }
       };
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
