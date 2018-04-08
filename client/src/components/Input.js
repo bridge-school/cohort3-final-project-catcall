@@ -2,13 +2,13 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import StyledInput from './styled/StyledInput';
 
-const Input = ({ handleChange, inputValue, type, display }) => {
+const Input = ({ handleChange, inputValue, type, display, placeholder }) => {
     return (
         <StyledInput
             type={type}
             onChange={(e) => handleChange(e)}
             value={inputValue}
-            placeholder={"Enter incident location"}
+            placeholder={placeholder}
             display={display}
         />
     );

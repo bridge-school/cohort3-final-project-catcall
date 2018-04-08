@@ -42,7 +42,15 @@ class MainPage extends Component {
         <StyledGrid>
           <StyledRow>
             <StyledCol xs={12} lg={12}>
+<<<<<<< HEAD
               <SimpleForm style={{ zIndex: 100 }} />
+=======
+              <Input
+                inputValue={location}
+                handleChange={this.handleChange}
+                placeholder="Enter incident location"
+              />
+>>>>>>> Adjusted background for selected Emoji
             </StyledCol>
           </StyledRow>
           <StyledRow>
