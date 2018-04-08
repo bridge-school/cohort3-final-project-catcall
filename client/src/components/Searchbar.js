@@ -25,8 +25,12 @@ class SimpleForm extends Component {
       onChange: this.handleChange,
     }
 
+    const cssClasses = {
+      root: { zIndex: '100' },
+    }
+
     return (
-        <PlacesAutocomplete inputProps={inputProps} style={{zIndex:100}}/>
+        <PlacesAutocomplete inputProps={inputProps} styles={cssClasses}/>
     )
   }
 }
