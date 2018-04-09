@@ -63,7 +63,6 @@ class Map extends Component {
     if (this.props && window.google) { // checks to make sure that props have been passed
       // const { google } = this.props; // sets props equal to google
 
-      console.log('the "loadMap()" was fired');
       const google = window.google;
       const maps = window.google.maps; // sets maps to google maps props
 

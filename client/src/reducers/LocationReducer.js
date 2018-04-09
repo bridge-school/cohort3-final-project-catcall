@@ -28,7 +28,6 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
                 }
             }
         case ACTION_TYPES.updatePinLocation:
-            console.log('got to Reducer with:', payload);
             return {
                 ...state,
                 loc: {

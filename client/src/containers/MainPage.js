@@ -35,7 +35,7 @@ class MainPage extends Component {
   }
 
   render() {
-    //const { loc } = this.props;
+    const { loc } = this.props;
     //const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
     const validForm = (loc.lat && loc.lng) || this.props.userInput
