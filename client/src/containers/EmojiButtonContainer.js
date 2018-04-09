@@ -7,10 +7,25 @@ import { updateRating } from '../actions/index';
 const EmojiButton = ({ selectedRating, updateRating, reaction }) => {
   const isChecked = selectedRating === reaction;
   return (
-    <label className="emoji-button">
-      <img src={`/imgs/${reaction}.png`} alt={reaction} role="button" />
-      <input type="radio" value={reaction} checked={isChecked} onChange={(e) => updateRating(e.target.value)}/>
-    </label>
+    <span>
+      <input
+        checked={isChecked}
+        className="emoji-button__radio"
+        id={`emoji-radio--${reaction}`}
+        onChange={(e) => updateRating(e.target.value)}
+        type="radio"
+        value={reaction}
+      />
+      <label
+        className="emoji-button__label"
+        htmlFor={`emoji-radio--${reaction}`}
+      >
+        <img
+         src={`/imgs/${reaction}.png`}
+         alt={reaction}
+         role="button" />
+      </label>
+    </span>
   );
 };
 
