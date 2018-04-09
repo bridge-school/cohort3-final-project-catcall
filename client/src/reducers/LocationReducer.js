@@ -5,8 +5,8 @@ const DEFAULT_STATE = {
         lat: 43.653226,
         lng: -79.383184
     },
-    userInput: {},
-    reports: [],
+    userInput: "Current Location",
+    reports: []
 }
 
 export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
@@ -35,6 +35,11 @@ export const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
                     lng: payload.longitude,
                 }
             }
+        case ACTION_TYPES.getUserInput: // input updating location
+            return {
+                ...state,
+                userInput: payload
+            }   
         case ACTION_TYPES.getUserReports:
             return {
                 ...state,
