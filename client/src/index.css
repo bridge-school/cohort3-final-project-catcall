@@ -2,4 +2,12 @@ body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+h2
+{
+  font-size: 1.6em;
+  color: #337ab7;
 }

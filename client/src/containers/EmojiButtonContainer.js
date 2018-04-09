@@ -1,15 +1,16 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-
+import Input from '../components/Input';
+import Image from '../components/Image';
 import { updateRating } from '../actions/index';
 
 const EmojiButton = ({ selectedRating, updateRating, reaction }) => {
   const isChecked = selectedRating === reaction;
   return (
-    <label className="emoji-button">
-      <img src={`/imgs/${reaction}.png`} alt={reaction} role="button" />
-      <input type="radio" value={reaction} checked={isChecked} onChange={(e) => updateRating(e.target.value)}/>
+    <label>
+      <Image src={`/imgs/${reaction}.png`} alt={reaction} role="button" highlight={isChecked} circle={true} />
+      <Input display="none" type="radio" inputValue={reaction} checked={isChecked} handleChange={(e) => updateRating(e.target.value)} />
     </label>
   );
 };

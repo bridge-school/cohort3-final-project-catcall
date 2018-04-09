@@ -1,8 +1,9 @@
 import React from 'react';
+import StyledImage from './styled/StyledImage';
 
-const Image = ({ src, alt }) => {
+const Image = ({ src, alt, highlight, circle }) => {
     return (
-        <img src='/imgs/logo.png' alt='logo' className="d-inline-block align-top" />
+        <StyledImage src={src} alt={alt} data-highlight={highlight} data-circle={circle} />
     );
 };
 

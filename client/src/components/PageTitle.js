@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Header from './Header';
 import Image from './Image';
-import StyledGrid from './styled/StyledGrid';
-import StyledRow from './styled/StyledRow';
-import StyledCol from './styled/StyledCol';
+import { StyledGrid, StyledRow, StyledCol} from './styled/StyledGridElements';
 
 const PageTitle = ({ children }) => {
     return (

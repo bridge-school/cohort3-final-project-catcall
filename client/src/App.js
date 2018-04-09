@@ -1,7 +1,5 @@
 import React from 'react';
 import { Route } from 'react-router';
-import './App.css';
-
 import MainPage from './containers/MainPage';
 import ReportPage from './containers/ReportPage';
 import ViewReportsPage from './containers/ViewReportsPage';
