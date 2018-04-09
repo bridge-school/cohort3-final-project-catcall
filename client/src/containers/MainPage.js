@@ -33,9 +33,11 @@ class MainPage extends Component {
 
     const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
 
+    const validForm = (loc.lat && loc.lng) || this.props.userInput
+
     return (
       <div className="App">
-        <NavBar/>
+        <NavBar />
         <StyledGrid>
           <StyledRow>
             <StyledCol xs={12} lg={12}>
@@ -47,9 +49,7 @@ class MainPage extends Component {
           </StyledRow>
           <StyledRow>
             <StyledCol xs={12} sm={12} md={6} lg={6}>
-              {/* TH: inline style on Button >> Link only till we figure out whethher the routing will be done indeed through 
-          Links or via onClick handlers */}
-              <Link to="/report" style={{ color: 'white' }}><Button bsStyle="primary">Report Incident</Button ></Link>
+              <Link to="/report" style={{ color: 'white' }}><Button bsStyle="primary" disabled={!validForm}>Report Incident</Button ></Link>
             </StyledCol>
             <StyledCol xs={12} sm={12} md={6} lg={6}>
               <Link to="/data" style={{ color: 'white' }}><Button bsStyle="primary">View Reports</Button></Link>
@@ -66,7 +66,7 @@ const mapStateToProps = state => ({
   loc: state.rootReducer.locationReducer.loc
 })
 
-  MainPage.propTypes = {
+MainPage.propTypes = {
   loc: PropTypes.object.isRequired,
   //userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
