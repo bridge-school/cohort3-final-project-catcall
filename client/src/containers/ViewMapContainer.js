@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 
 // import the Google Maps API Wrapper from google-maps-react
-import { GoogleApiWrapper } from 'google-maps-react' 
-// import child component
+import { GoogleApiWrapper } from 'google-maps-react'
 import ViewReportMap from '../components/ViewReportMap'
+
 class ViewMapContainer extends Component {
   render() {
     const { reports } = this.props;
     return (
       <div>
-        <ViewReportMap 
-          google={this.props.google} 
+        <ViewReportMap
+          google={this.props.google}
           reports={reports} />
       </div>
     );

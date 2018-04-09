@@ -12,7 +12,6 @@ class MapContainer extends Component {
     return (
       <div>
         <Map
-          //google={this.props.google}
           getUserLocation={getUserLocation}
           location={this.props.loc}
           updatePinLocation={updatePinLocation}
@@ -26,8 +25,8 @@ const mapStateToProps = (state) => ({
   loc: state.rootReducer.locationReducer.loc
 })
 
-const mapDispatchToProps = dispatch => 
-  bindActionCreators({ 
+const mapDispatchToProps = dispatch =>
+  bindActionCreators({
     getUserLocation: getUserLocation,
     updatePinLocation: updatePinLocation,
   }, dispatch)
