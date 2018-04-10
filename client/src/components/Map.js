@@ -7,7 +7,7 @@ class Map extends Component {
     super(props);
     this.state = { 
       map: null,
-      pin: null 
+      pin: null
      };
   }
 
@@ -121,13 +121,15 @@ class Map extends Component {
         });
 
       this.setState({ pin: marker });
+    
     }
   }
 
   moveMap({ lat = 0, lng = 0 }) {
-    console.log(this.state.map)
     this.state.map.panTo({ lat, lng });
-    
+    if (this.state.pin != null){
+      this.state.pin.setPosition({lat, lng});
+    }
   }
 
   render() {
