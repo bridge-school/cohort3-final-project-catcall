@@ -1,10 +1,10 @@
 import { combineReducers } from 'redux';
 import { locationReducer } from './LocationReducer'
-import { RatingReducer } from './RatingReducer'
+import { ratingReducer } from './RatingReducer'
 
 export const rootReducer = combineReducers({
     locationReducer,
-    RatingReducer
+    ratingReducer
 });
 
 export default rootReducer;
