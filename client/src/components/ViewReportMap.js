@@ -43,7 +43,7 @@ export default class ViewReportMap extends Component {
 
       const icons = {
         expressionless: {
-          icon: '/imgs/angry.png'
+          icon: '/imgs/expressionless.png'
         },
         anguished: {
           icon: '/imgs/anguished.png'
@@ -55,6 +55,9 @@ export default class ViewReportMap extends Component {
           icon: '/imgs/fearful.png'
         },
         scream: {
+          icon: '/imgs/scream.png'
+        },
+        screaming: {
           icon: '/imgs/scream.png'
         },
       };
@@ -71,6 +74,9 @@ export default class ViewReportMap extends Component {
           icon: icons[location.emotion].icon,
           title: location.emotion // the title of the marker is set to the name of the location
         });
+
+
+
       })
     }
   }
