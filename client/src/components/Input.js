@@ -20,6 +20,3 @@ Input.propTypes = {
 }
 
 export default Input;
-
-// TODO add a label to input for accessibility
-// TODO, this location enter + submit should ultimately be a form

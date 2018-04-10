@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom'
+import ReactDOM from 'react-dom';
+
+import icons from '../shared/data';
 
 export default class ViewReportMap extends Component {
 
@@ -40,24 +42,6 @@ export default class ViewReportMap extends Component {
           { featureType: 'water', elementType: 'labels.text.stroke', stylers: [{ color: '#17263c' }] }
         ]
       })
-
-      const icons = {
-        expressionless: {
-          icon: '/imgs/angry.png'
-        },
-        anguished: {
-          icon: '/imgs/anguished.png'
-        },
-        angry: {
-          icon: '/imgs/angry.png'
-        },
-        fearful: {
-          icon: '/imgs/fearful.png'
-        },
-        scream: {
-          icon: '/imgs/scream.png'
-        },
-      };
 
       this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
 

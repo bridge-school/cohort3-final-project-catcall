@@ -5,10 +5,10 @@ class Map extends Component {
 
   constructor(props) {
     super(props);
-    this.state = { 
+    this.state = {
       map: null,
       pin: null
-     };
+    };
   }
 
   getGoogleMaps() {
@@ -104,42 +104,42 @@ class Map extends Component {
 
       const mapInstance = new maps.Map(node, mapConfig);
 
-      this.setState({ map: mapInstance}); 
+      this.setState({ map: mapInstance });
 
-      const marker = new maps.Marker({ 
-          position: {lat: locat.lat(), lng: locat.lng()}, 
-          map: mapInstance, 
-          draggable: true 
-        });
+      const marker = new maps.Marker({
+        position: { lat: locat.lat(), lng: locat.lng() },
+        map: mapInstance,
+        draggable: true
+      });
 
-        marker.addListener('dragend', () => {
-          let position = marker.getPosition()
-          let latitude = position.lat()
-          let longitude = position.lng()
-          this.props.updatePinLocation(latitude, longitude); // <-- our action
-          //geocodePosition(marker.getPosition()); HERE
-        });
+      marker.addListener('dragend', () => {
+        let position = marker.getPosition()
+        let latitude = position.lat()
+        let longitude = position.lng()
+        this.props.updatePinLocation(latitude, longitude); // <-- our action
+        //geocodePosition(marker.getPosition()); HERE
+      });
 
       this.setState({ pin: marker });
-    
+
     }
   }
 
   moveMap({ lat = 0, lng = 0 }) {
     this.state.map.panTo({ lat, lng });
-    if (this.state.pin != null){
-      this.state.pin.setPosition({lat, lng});
+    if (this.state.pin !== null) {
+      this.state.pin.setPosition({ lat, lng });
     }
   }
 
   render() {
     const style =
       {
-        width: '100vw', 
+        width: '100vw',
         height: '70vh'
       }
 
-    return ( 
+    return (
       <div ref="map" style={style}>
         loading map...
       </div>

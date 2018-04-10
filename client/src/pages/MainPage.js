@@ -19,10 +19,6 @@ class MainPage extends Component {
     }
   }
 
-  startNewReport = () => { }
-
-  viewReports = () => { }
-
   handleFormSubmit = (e) => {
     geocodeByAddress(this.props.userLocation)
       .then(results => getLatLng(results[0]))
@@ -32,8 +28,6 @@ class MainPage extends Component {
 
   render() {
     const { loc } = this.props;
-    //const location = loc && loc.lat && loc.lng ? `${loc.lat} ${loc.lng}` : 'Loading location...';
-
     const validForm = (loc.lat && loc.lng) || this.props.userInput
 
     return (
@@ -66,7 +60,6 @@ const mapStateToProps = state => ({
 
 MainPage.propTypes = {
   loc: PropTypes.object.isRequired,
-  //userLocation: PropTypes.object.isRequired,
   fetchLocation: PropTypes.func.isRequired,
   getUserLocation: PropTypes.func.isRequired,
   location: PropTypes.object.isRequired

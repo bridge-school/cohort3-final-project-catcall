@@ -1,8 +1,8 @@
 import React from 'react';
 import { Route } from 'react-router';
-import MainPage from './containers/MainPage';
-import ReportPage from './containers/ReportPage';
-import ViewReportsPage from './containers/ViewReportsPage';
+import MainPage from './pages/MainPage';
+import ReportPage from './pages/ReportPage';
+import ViewReportsPage from './pages/ViewReportsPage';
 
 const App = () => (
   <div>
