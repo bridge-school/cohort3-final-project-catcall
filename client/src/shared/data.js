@@ -1,6 +1,6 @@
 const icons = {
     expressionless: {
-        icon: '/imgs/angry.png',
+        icon: '/imgs/expressionless.png',
         name: 'expressionless',
     },
     anguished: {
