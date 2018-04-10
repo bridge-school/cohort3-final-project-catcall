@@ -23,7 +23,7 @@ class SimpleForm extends Component {
     const inputProps = {
       value: this.props.userInput,
       onChange: this.handleChange,
-      placeholder: "Search"
+      placeholder: "Enter incident location"
     }
 
     const cssClasses = {
