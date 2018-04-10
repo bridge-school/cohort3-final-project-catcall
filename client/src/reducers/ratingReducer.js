@@ -4,7 +4,7 @@ const DEFAULT_STATE = {
     selectedRating: null
 }
 
-export const ratingReducer = (state = DEFAULT_STATE, { type, payload }) => {
+export const RatingReducer = (state = DEFAULT_STATE, { type, payload }) => {
     switch (type) {
         case ACTION_TYPES.updateRating:
             return {
