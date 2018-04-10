@@ -15,7 +15,7 @@ class SimpleForm extends Component {
     e.preventDefault()
     geocodeByAddress(this.props.userInput)
       .then(results => getLatLng(results[0]))
-      .then(latLng => this.props.getUserLocation({ latitude: latLng.lat,  longitude: latLng.lng }))
+      .then(latLng => this.props.getUserLocation({ latitude: latLng.lat, longitude: latLng.lng }))
       .catch(error => console.error('Error', error))
   }
 
@@ -23,6 +23,7 @@ class SimpleForm extends Component {
     const inputProps = {
       value: this.props.userInput,
       onChange: this.handleChange,
+      placeholder: "Enter incident location"
     }
 
     const cssClasses = {
@@ -30,18 +31,18 @@ class SimpleForm extends Component {
     }
 
     return (
-        <PlacesAutocomplete inputProps={inputProps} styles={cssClasses}/>
+      <PlacesAutocomplete inputProps={inputProps} styles={cssClasses} />
     )
   }
 }
 const mapStateToProps = state => ({
-    loc: state.rootReducer.locationReducer.loc,
-    userInput: state.rootReducer.locationReducer.userInput
+  loc: state.rootReducer.locationReducer.loc,
+  userInput: state.rootReducer.locationReducer.userInput
 })
 
 const mapDispatchToProps = {
-    getUserInput,
-    getUserLocation
+  getUserInput,
+  getUserLocation
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleForm);
