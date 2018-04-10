@@ -121,11 +121,15 @@ class Map extends Component {
       });
 
       this.setState({ pin: marker });
+
     }
   }
 
   moveMap({ lat = 0, lng = 0 }) {
     this.state.map.panTo({ lat, lng });
+    if (this.state.pin !== null) {
+      this.state.pin.setPosition({ lat, lng });
+    }
   }
 
   render() {
