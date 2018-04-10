@@ -4,6 +4,10 @@ import { Navbar } from 'react-bootstrap';
 const StyledNavBar = styled(Navbar) `
     margin-bottom: 0px;
 
+    .navbar-header {
+        float: none !important;
+    }
+
     .navbar-link {
         float: right !important;
         padding: 15px 15px;
