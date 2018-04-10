@@ -7,7 +7,7 @@ const DEFAULT_STATE = {
         lat: 43.653226,
         lng: -79.383184
     },
-    userInput: "Current Location",
+    userInput: "",
     reports: [],
     selectedRating: null,
 }
