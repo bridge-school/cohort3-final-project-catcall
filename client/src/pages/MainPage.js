@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { geocodeByAddress, getLatLng } from 'react-places-autocomplete';
 
-
+import { getUserLocation, fetchLocation } from '../actions/index';
 import { Link } from 'react-router-dom';
 
 import { StyledGrid, StyledRow, StyledCol } from '../components/styled/StyledGridElements';
@@ -66,7 +66,8 @@ MainPage.propTypes = {
 }
 
 const mapDispatchToProps = {
-  getUserLocation
+  getUserLocation,
+  fetchLocation,
 };
 
 
