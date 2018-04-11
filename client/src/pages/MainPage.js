@@ -14,8 +14,8 @@ import NavBar from '../components/NavBar';
 class MainPage extends Component {
 
   componentDidMount() {
-    if (navigator.geolocation) {
-      this.props.fetchLocation(navigator.geolocation);
+    if (navigator.geolocation && this.props.userLocation.length === 0) {
+      navigator.geolocation.getCurrentPosition(position => this.props.fetchLocation(position))
     }
   }
 
