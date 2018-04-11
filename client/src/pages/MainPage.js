@@ -15,7 +15,7 @@ class MainPage extends Component {
 
   componentDidMount() {
     if (navigator.geolocation) {
-      this.props.fetchLocation(navigator.geolocation);
+      navigator.geolocation.getCurrentPosition(position => this.props.fetchLocation(position))
     }
   }
 
