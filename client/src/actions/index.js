@@ -10,6 +10,7 @@ export const ACTION_TYPES = {
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
     getUserReports: 'GET_USER_REPORTS',
+    fetchGeoCode: 'FETCH_GEO_CODE'
 };
 
 export const getUserLocation = (location) => {
