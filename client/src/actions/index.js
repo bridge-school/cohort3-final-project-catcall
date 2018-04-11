@@ -30,16 +30,11 @@ export const getUserInput = (address) => {
 // Action for the thunk location API request
 export const fetchLocation = (location) => {
     return (dispatch, getState) => {
-        const userInput = getState().rootReducer.locationReducer.userInput;
-
-        if (userInput.length === 0) {
-            dispatch({ type: ACTION_TYPES.getLocationStart });
-            dispatch({
-                type: ACTION_TYPES.getLocationSuccess,
-                payload: location.coords
-            });
-        }
-        return;
+        dispatch({ type: ACTION_TYPES.getLocationStart });
+        dispatch({
+            type: ACTION_TYPES.getLocationSuccess,
+            payload: location.coords
+        });
     }
 }
 
