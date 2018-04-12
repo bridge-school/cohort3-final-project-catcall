@@ -1,25 +1,77 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-
+import ReactDOM from 'react-dom'
 import icons from '../shared/data';
 
-export default class ViewReportMap extends Component {
+class ViewReportMap extends Component {
 
-  componentDidUpdate() {
-    this.loadMap(); // call loadMap function to load the google map
+  constructor(props) {
+    super(props);
+    this.state = {
+      map: null,
+      pin: null
+    };
   }
 
+  getGoogleMaps() {
+    const google = window.google;
+
+    if (google) {
+      return new Promise((resolve) => resolve(google))
+    }
+
+    // If we haven't already defined the promise, define it
+    if (!this.googleMapsPromise) {
+      this.googleMapsPromise = new Promise((resolve) => {
+        // Add a global handler for when the API finishes loading
+        window.resolveGoogleMapsPromise = () => {
+          // Resolve the promise
+          resolve(google);
+
+          // Tidy up
+          delete window.resolveGoogleMapsPromise;
+        };
+
+        // Load the Google Maps API
+        const script = document.createElement("script");
+        const API = 'AIzaSyA06nlgcoEtxl0TMQeh0Sm4DQjZh6gV_mA';
+        script.src = `https://maps.googleapis.com/maps/api/js?key=${API}&callback=resolveGoogleMapsPromise`;
+        script.async = true;
+        document.body.appendChild(script);
+      });
+    }
+
+    // Return a promise for the Google Maps API
+    return this.googleMapsPromise;
+  }
+
+  componentWillMount() {
+    // Start Google Maps API loading since we know we'll soon need it
+    this.getGoogleMaps();
+  }
+
+  componentDidMount() {
+    // Once the Google Maps API has finished loading, initialize the map
+    this.getGoogleMaps().then(() => {
+      this.loadMap();
+    });
+  }
+
+
   loadMap() {
-    if (this.props && this.props.google) { // checks to make sure that props have been passed
-      const { google, reports } = this.props; // sets props equal to google
-      const maps = google.maps; // sets maps to google maps props
+    
+    if (this.props && window.google) { // checks to make sure that props have been passed      
+      const maps = window.google.maps; // sets maps to google maps props
 
       const mapRef = this.refs.map; // looks for HTML div ref 'map'. Returned in render below.
       const node = ReactDOM.findDOMNode(mapRef); // finds the 'map' div in the React DOM, names it node
 
+      // TH: Style implemented is just a showing of how ic could be accomplished. Because it relies on its own properties, rather than CSS,
+      // I don't believe Bootstrap + Styled-Components would apply here
+      // styles can be better generated through https://mapstyle.withgoogle.com/ and have "styles" property imported here to replace 
+      // the current one, once a design standard is decided on
       const mapConfig = Object.assign({}, {
-        center: { lat: 43.660194100000005, lng: -79.383184 }, // sets center of google map to NYC.
-        zoom: 13, // sets zoom. Lower numbers are zoomed further out.
+        center: { lat: 43.651913, lng: -79.370575 },
+        zoom: 13,
         mapTypeId: 'roadmap',
         styles: [
           { elementType: 'geometry', stylers: [{ color: '#242f3e' }] },
@@ -43,34 +95,54 @@ export default class ViewReportMap extends Component {
         ]
       })
 
-      this.map = new maps.Map(node, mapConfig); // creates a new Google map on the specified node (ref='map') with the specified configuration set above.
+      const mapInstance = new maps.Map(node, mapConfig);
 
+      this.setState({ map: mapInstance });
+
+      
       // ==================
       // ADD MARKERS TO MAP
       // ==================
-      reports.forEach(location => { // iterate through locations saved in state
-        const marker = new google.maps.Marker({ // creates a new Google maps Marker object.
-          position: { lat: location.latitude, lng: location.longitude }, // sets position of marker to specified location
-          map: this.map, // sets markers to appear on the map we just created on line 35
-          icon: icons[location.emotion].icon,
-          title: location.emotion // the title of the marker is set to the name of the location
-        });
-      })
+      
+      
+      // console.log(JSON.stringify(this.props.reports))
+
     }
   }
-
 
 
   render() {
-    const style = { // MUST specify dimensions of the Google map or it will not work. Also works best when style is specified inside the render function and created as an object
-      width: '100vw', // 90vw basically means take up 90% of the width screen. px also works.
-      height: '75vh' // 75vh similarly will take up roughly 75% of the height of the screen. px also works.
-    }
+    const { reports } = this.props;
+    const maps = window.google.maps;
+    const style =
+      {
+        width: '100vw',
+        height: '70vh'
+      }
+      reports.forEach(location => { // iterate through locations saved in state
 
-    return ( // in our return function you must return a div with ref='map' and style.
-      <div ref="map" style={style}>
-        loading map...
+        new maps.Marker({ // creates a new Google maps Marker object.
+          position: { lat: location.latitude, lng: location.longitude }, // sets position of marker to specified location
+          map: this.state.map, // sets markers to appear on the map we just created on line 35
+          icon: icons[location.emotion].icon,
+          title: location.emotion // the title of the marker is set to the name of the location
+        });
+      });
+      if(reports.length){
+        const { latitude, longitude } = reports[reports.length-1];
+        this.state.map.setCenter(new maps.LatLng(latitude, longitude));
+      }
+      
+    return (
+      <div>
+        <div ref="map" style={style}>
+          loading map...
+          
+        </div>
       </div>
+      
     )
   }
-}
+};
+
+export default ViewReportMap;

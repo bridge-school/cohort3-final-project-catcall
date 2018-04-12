@@ -19,12 +19,14 @@ class ViewReportsPage extends Component {
     }
   }
   render() {
+    
     const { reports } = this.props;    
     return(
       <div className="page">
         <NavBar/>
         <ViewMapContainer 
           reports = {reports}/>
+        
       </div>
     )
   }
