@@ -100,14 +100,6 @@ class ViewReportMap extends Component {
 
       this.setState({ map: mapInstance });
 
-      
-      // ==================
-      // ADD MARKERS TO MAP
-      // ==================
-      
-      
-      // console.log(JSON.stringify(this.props.reports))
-
     }
   }
 
@@ -121,6 +113,9 @@ class ViewReportMap extends Component {
         height: '70vh'
       }
       reports.forEach(location => { // iterate through locations saved in state
+        // ==================
+        // ADD MARKERS TO MAP
+        // ==================
 
         new maps.Marker({ // creates a new Google maps Marker object.
           position: { lat: location.latitude, lng: location.longitude }, // sets position of marker to specified location
