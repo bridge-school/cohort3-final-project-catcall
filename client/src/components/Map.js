@@ -101,10 +101,16 @@ class Map extends Component {
           { featureType: 'water', elementType: 'labels.text.stroke', stylers: [{ color: '#17263c' }] }
         ]
       })
+      
 
       const mapInstance = new maps.Map(node, mapConfig);
 
       this.setState({ map: mapInstance });
+
+      var infowindow = new google.maps.InfoWindow();
+      var infowindowContent = document.getElementById('infowindow-content');
+      infowindow.setContent(infowindowContent);
+      var service = new google.maps.places.PlacesService(mapInstance);
 
       const marker = new maps.Marker({
         position: { lat: locat.lat(), lng: locat.lng() },
@@ -120,7 +126,25 @@ class Map extends Component {
         //geocodePosition(marker.getPosition()); HERE
       });
 
+      marker.addListener('click', function() {
+        infowindow.open(mapInstance, marker);
+      });
+
       this.setState({ pin: marker });
+
+        // service.getDetails({
+        //   //placeId: 'ChIJN1t_tDeuEmsRUsoyG83frY4'
+        // }, function(place, status) {
+        //   if (status === google.maps.places.PlacesServiceStatus.OK) {
+        //     google.maps.event.addListener(marker, 'click', function() {
+        //       infowindow.setContent('<div><strong>' + place.name + '</strong><br>' +
+        //         'Place ID: ' //+ place.place_id 
+        //         + '<br>' +
+        //         place.formatted_address + '</div>');
+        //       infowindow.open(mapInstance, this);
+        //     });
+        //   }
+        // });
 
     }
   }

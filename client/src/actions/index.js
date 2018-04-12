@@ -10,6 +10,7 @@ export const ACTION_TYPES = {
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
     getUserReports: 'GET_USER_REPORTS',
+    getPlaceId: 'GET_PLACE_ID'
 };
 
 export const getUserLocation = (location) => {
@@ -29,16 +30,22 @@ export const getUserInput = (address) => {
 
 // Action for the thunk location API request
 export const fetchLocation = (location) => {
-    return dispatch => {
-        dispatch({ type: ACTION_TYPES.getLocationStart });
-        return location.getCurrentPosition((position) => {
-            dispatch({
-                type: ACTION_TYPES.getLocationSuccess,
-                payload: position.coords
-            });
-        });
+    return (dispatch, getState) => { 
+            dispatch({ type: ACTION_TYPES.getLocationStart });
+                return location.getCurrentPosition((position) => {
+                    if (getState().rootReducer.locationReducer.userInput=="") {
+                        dispatch({
+                            type: ACTION_TYPES.getLocationSuccess,
+                            payload: position.coords
+                        });
+                    }
+                    else {
+                        console.log("we went to another page")
+                    }
+                })
+            
+            }
     }
-}
 
 // Action for the pin location
 export const updatePinLocation = (latitude, longitude) => {
@@ -105,5 +112,12 @@ export const getUserReports = () => {
         .catch(error => {
             console.error(error)
         });
+    }
+}
+
+export const getPlaceId = (placeId) => {
+    return {
+        type: ACTION_TYPES.getPlaceId,
+        payload: placeId,
     }
 }
