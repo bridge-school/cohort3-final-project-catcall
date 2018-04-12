@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom'
 import icons from '../shared/data';
+import { connect } from 'react-redux';
 
 class ViewReportMap extends Component {
 
@@ -8,7 +9,7 @@ class ViewReportMap extends Component {
     super(props);
     this.state = {
       map: null,
-      pin: null
+      pin: null, 
     };
   }
 
@@ -125,12 +126,12 @@ class ViewReportMap extends Component {
           position: { lat: location.latitude, lng: location.longitude }, // sets position of marker to specified location
           map: this.state.map, // sets markers to appear on the map we just created on line 35
           icon: icons[location.emotion].icon,
-          title: location.emotion // the title of the marker is set to the name of the location
+          title: location.emotion  // the title of the marker is set to the name of the location
         });
       });
-      if(reports.length){
-        const { latitude, longitude } = reports[reports.length-1];
-        this.state.map.setCenter(new maps.LatLng(latitude, longitude));
+      if(this.props.loc.lat && this.state.map){
+        const { lat, lng } = this.props.loc;
+        this.state.map.setCenter(new maps.LatLng(lat, lng));
       }
       
     return (
@@ -145,4 +146,8 @@ class ViewReportMap extends Component {
   }
 };
 
-export default ViewReportMap;
+const mapStateToProps = state => ({
+  loc: state.rootReducer.locationReducer.loc
+})
+
+export default connect(mapStateToProps, null)(ViewReportMap);
