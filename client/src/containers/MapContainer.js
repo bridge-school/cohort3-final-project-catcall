@@ -15,6 +15,7 @@ class MapContainer extends Component {
           getUserLocation={getUserLocation}
           location={this.props.loc}
           updatePinLocation={updatePinLocation}
+          placeId={this.props.placeId}
         />
       </div>
     );
@@ -22,7 +23,8 @@ class MapContainer extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  loc: state.rootReducer.locationReducer.loc
+  loc: state.rootReducer.locationReducer.loc,
+  placeId: state.rootReducer.locationReducer.placeId
 })
 
 const mapDispatchToProps = dispatch =>

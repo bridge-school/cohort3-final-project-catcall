@@ -37,6 +37,7 @@ export const fetchLocation = (location) => {
             payload: location.coords
         });
     }
+}
 
 // Action for the pin location
 export const updatePinLocation = (latitude, longitude) => {
