@@ -30,21 +30,12 @@ export const getUserInput = (address) => {
 
 // Action for the thunk location API request
 export const fetchLocation = (location) => {
-    return (dispatch, getState) => { 
-            dispatch({ type: ACTION_TYPES.getLocationStart });
-                return location.getCurrentPosition((position) => {
-                    if (getState().rootReducer.locationReducer.userInput=="") {
-                        dispatch({
-                            type: ACTION_TYPES.getLocationSuccess,
-                            payload: position.coords
-                        });
-                    }
-                    else {
-                        console.log("we went to another page")
-                    }
-                })
-            
-            }
+    return (dispatch, getState) => {
+        dispatch({ type: ACTION_TYPES.getLocationStart });
+        dispatch({
+            type: ACTION_TYPES.getLocationSuccess,
+            payload: location.coords
+        });
     }
 
 // Action for the pin location
@@ -101,17 +92,17 @@ export const handleSubmitReport = () => {
 export const getUserReports = () => {
     return (dispatch) => {
         ApiService.get('/')
-        .then(response => {
-            
-            return dispatch({
-                type: ACTION_TYPES.getUserReports,
-                payload: response.data,
+            .then(response => {
+
+                return dispatch({
+                    type: ACTION_TYPES.getUserReports,
+                    payload: response.data,
+                });
+
+            })
+            .catch(error => {
+                console.error(error)
             });
-            
-        })
-        .catch(error => {
-            console.error(error)
-        });
     }
 }
 
