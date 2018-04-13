@@ -3,6 +3,7 @@ import { Provider } from 'react-redux'
 import { createStore, combineReducers, applyMiddleware } from 'redux';
 import ReactDOM from 'react-dom';
 import thunk from 'redux-thunk';
+import { epicMiddleware } from './epics';
 
 import createHistory from 'history/createBrowserHistory';
 import { ConnectedRouter, routerReducer, routerMiddleware } from 'react-router-redux';
@@ -21,7 +22,7 @@ const store = createStore(
     rootReducer,
     router: routerReducer
   }),
-  applyMiddleware(thunk, middleware, logger)
+  applyMiddleware(epicMiddleware, thunk, middleware, logger)
 );
 
 ReactDOM.render(
