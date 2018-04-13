@@ -7,7 +7,8 @@ class Map extends Component {
     super(props);
     this.state = {
       map: null,
-      pin: null
+      pin: null,
+      info: null
     };
   }
 
@@ -101,10 +102,16 @@ class Map extends Component {
           { featureType: 'water', elementType: 'labels.text.stroke', stylers: [{ color: '#17263c' }] }
         ]
       })
+      
 
       const mapInstance = new maps.Map(node, mapConfig);
 
       this.setState({ map: mapInstance });
+
+      const infowindow = new maps.InfoWindow();
+      this.setState({ info: infowindow });
+
+      var service = new google.maps.places.PlacesService(mapInstance);
 
       const marker = new maps.Marker({
         position: { lat: locat.lat(), lng: locat.lng() },
@@ -119,9 +126,18 @@ class Map extends Component {
         this.props.updatePinLocation(latitude, longitude); // <-- our action
         //geocodePosition(marker.getPosition()); HERE
       });
-
       this.setState({ pin: marker });
 
+      service.getDetails({
+        placeId: this.props.placeId
+      }, function(place, status) {
+        if (status === google.maps.places.PlacesServiceStatus.OK) {
+          google.maps.event.addListener(marker, 'click', function() {
+            infowindow.setContent('<div><strong> Location: </strong><br>' + place.formatted_address + '</div>');
+            infowindow.open(mapInstance, this);
+          });
+        }
+      });
     }
   }
 
@@ -130,6 +146,19 @@ class Map extends Component {
     if (this.state.pin !== null) {
       this.state.pin.setPosition({ lat, lng });
     }
+    const google = window.google;
+    const geocoder = new google.maps.Geocoder();
+    const infowin = this.state.info
+
+    geocoder.geocode({latLng: { lat, lng }}, function(responses) {
+      if (responses && responses.length > 0) {
+         if (infowin !== null) {
+          infowin.setContent('<div><strong> Location:</strong><br>' + responses[0].formatted_address + '</div>');
+          }
+      } else {
+        console.log('Cannot determine address at this location.');
+      }
+    });
   }
 
   render() {

@@ -10,6 +10,7 @@ export const ACTION_TYPES = {
     updateRating: 'UPDATE_RATING',
     handleSubmitReport: 'HANDLE_SUBMIT_REPORT',
     getUserReports: 'GET_USER_REPORTS',
+    getPlaceId: 'GET_PLACE_ID',
     fetchGeoCode: 'FETCH_GEO_CODE'
 };
 
@@ -106,3 +107,11 @@ export const getUserReports = () => {
             });
     }
 }
+
+export const getPlaceId = (placeId) => {
+    return {
+        type: ACTION_TYPES.getPlaceId,
+        payload: placeId,
+    }
+}
+

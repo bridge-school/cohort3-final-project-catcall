@@ -2,10 +2,17 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 import PlacesAutocomplete, { geocodeByAddress, getLatLng } from 'react-places-autocomplete'
-import { getUserInput, getUserLocation } from '../actions/index';
+import { getUserInput, getUserLocation, getPlaceId } from '../actions/index';
 
 
 class SimpleForm extends Component {
+  
+  handleSelect = (address, placeId) => {
+    this.handleChange(address)
+    console.log(placeId)
+    this.props.getPlaceId(placeId)
+    //this.setState({ placeId })
+  }
 
   handleChange = (e) => {
     this.props.getUserInput(e);
@@ -31,18 +38,20 @@ class SimpleForm extends Component {
     }
 
     return (
-      <PlacesAutocomplete inputProps={inputProps} styles={cssClasses} />
+      <PlacesAutocomplete inputProps={inputProps} styles={cssClasses} onSelect={this.handleSelect} />
     )
   }
 }
 const mapStateToProps = state => ({
   loc: state.rootReducer.locationReducer.loc,
-  userInput: state.rootReducer.locationReducer.userInput
+  userInput: state.rootReducer.locationReducer.userInput,
+  placeId: state.rootReducer.locationReducer.placeId,
 })
 
 const mapDispatchToProps = {
   getUserInput,
-  getUserLocation
+  getUserLocation,
+  getPlaceId
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(SimpleForm);

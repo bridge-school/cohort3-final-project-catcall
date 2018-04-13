@@ -8,6 +8,7 @@ const DEFAULT_STATE = {
         lng: -79.383184
     },
     userInput: "",
+    placeId: "",
     reports: [],
     selectedRating: null,
 }
@@ -42,6 +43,11 @@ const locationReducer = (state = DEFAULT_STATE, { type, payload }) => {
             return {
                 ...state,
                 userInput: payload
+            }
+        case ACTION_TYPES.getPlaceId: // input updating location
+            return {
+                ...state,
+                placeId: payload
             }
         case ACTION_TYPES.getUserReports:
             return {
